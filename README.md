@@ -1,0 +1,1 @@
+Extra teaching materials for Statistical Theory course. Feel free to modify and or use anything.
