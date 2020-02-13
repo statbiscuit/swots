@@ -30,7 +30,7 @@ saveGIF(
         ## pc3 axis
         ## arrows(sin(t3[i]*pi/180),cos(t3[i]*pi/180),sin(h3[i]*pi/180),cos(h3[i]*pi/180),lwd = 5,length = 0.1)
         ## text(sin(h3[i]*pi/180) + 0.1,cos(h3[i]*pi/180) + 0.1,"PC 3",cex = 1.25)
-    },movie.name = "~/Desktop/pca.gif"
+    },movie.name = "pca.gif"
 )
 
 ## perpendicular plot
@@ -70,7 +70,7 @@ r <- 3.75
 pts <- cbind(x,y) ## data points
 
 ## bread data plot
-png("~/Desktop/bread_data.png")
+png("bread_data.png")
 par(xpd = TRUE)
 plot(x,y,,type = "n",axes = FALSE, ylab = "", xlab = "", xlim  = c(-3,3),ylim = c(-3,3))
 rasterImage(bread,-4.25,-4.25,4,4)
@@ -103,7 +103,7 @@ saveGIF(
         new.line <- l.eq(pts1,pts2)
         inter <- apply(pts,1,get.inter,m = new.line[1], b = new.line[2]) ## all interception points
         arrows(pts[,1],pts[,2],inter[1,],inter[2,],code = 0,col = "blue")
-    },movie.name = "~/Desktop/perp.gif"
+    },movie.name = "perp.gif"
 )
 
 

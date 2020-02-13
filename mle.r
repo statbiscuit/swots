@@ -8,7 +8,7 @@ dl <- function(x,n,p){
     choose(n,x)*p^(x-1)*(1 - p)^(n - x - 1)*(x - n*p)
 }
 
-pngs <- list.files("mle_pics",pattern = ".png",full = TRUE)
+pngs <- list.files("figs/mle_pics",pattern = ".png",full = TRUE)
 imgs <- lapply(pngs,png::readPNG)
 
 ## Binomial params

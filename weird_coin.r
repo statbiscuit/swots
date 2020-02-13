@@ -1,6 +1,6 @@
 library(png)
 require(animation)
-pngs <- list.files("coin_pics",".png",full = TRUE)
+pngs <- list.files("figs/","coin",full = TRUE)
 imgs <- lapply(pngs,png::readPNG)
 
 ani.options(interval = 0.5,ani.width = 1800, ani.height = 900)
@@ -73,5 +73,5 @@ saveGIF({
         mtext(paste(0:10,"\n teasing \n or \n sleeping \n cats"),line = 9,side = 1, at = bar, cex = 0.9)
         par(mar = c(5.1, 4.1, 4.1, 2.1))
     }
-},movie.name = "coin.gif")
+},movie.name = "binomial_cat.gif")
 
