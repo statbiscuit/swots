@@ -94,14 +94,15 @@ saveGIF({
                   axis.title.y = element_text(size = rel(1)),
                   axis.title.x = element_text(size = rel(1)),
                   text = element_text(size=20))  +
-            xlim(range(dat.all$slope,na.rm = TRUE) + c(-1,1)) + ## keep xlim to same limits of est slopes 
+            xlim(range(dat.all$slope,na.rm = TRUE) + c(-1,1)) + ## keep xlim to same limits of est slopes
+            ylim(c(0,max(table(cut(dat.all$slope,10))))) +
             annotate('segment',x = 1/20, y = 0, xend = 1/20,
                      yend = 10,color = "grey",size = 1.5,alpha = 0.7) +
-            annotate('text',x = 1/20, y = 10, label = "True slope = 0.05",size = 5) +
+            annotate('text',x = 0.5, y = 10, label = "True slope = 0.05",size = 5) +
             annotate('text',x = 0.75, y = 7.5,label = paste("Est. slopes mean = ",round(mean(dat$slope,na.rm = TRUE),2)),size = 5)
         ## plot side by side
         grid.arrange(l,h, ncol=2)
     }
-},movie.name = "~/Desktop/lm_demo.gif")
+},movie.name = "lm_demo.gif")
 
 
