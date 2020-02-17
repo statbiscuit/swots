@@ -1,4 +1,4 @@
-png("pdqr.png",width = 1000,height = 500)
+png("pdqr.png",width = 1250,height = 500)
 par(xpd = TRUE,mfrow = c(1,2), mar = c(4,2,0,3))
 ## Normal dist.
 set.seed(1234)

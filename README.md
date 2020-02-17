@@ -36,6 +36,8 @@ This works in conjunction with a Google Apps Script I made that allows students 
 
 ![](gifs/mle.gif)
 
+*[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/mle.r)*
+
 ### Illustrating things I found a few students struggled with...
 
 #### Distribution shape as sample size increases and variance

@@ -8,7 +8,7 @@ dl <- function(x,n,p){
     choose(n,x)*p^(x-1)*(1 - p)^(n - x - 1)*(x - n*p)
 }
 
-pngs <- list.files("figs/mle_pics",pattern = ".png",full = TRUE)
+pngs <- list.files("figs/",pattern = "mle_pics",full = TRUE)
 imgs <- lapply(pngs,png::readPNG)
 
 ## Binomial params
@@ -37,5 +37,5 @@ saveGIF(
         vall <- round(dl(x,n,p.new[i]),3)
         points(p.new[i],lik(x,n,p.new[i]),col = "red",pch = 20, cex = 3)
         legend("topleft",bty = "n",legend = bquote(frac(dL,dp) == .(vall)),cex = 3)
-    },movie.name = "lik.gif"
+    },movie.name = "mle.gif"
 )
