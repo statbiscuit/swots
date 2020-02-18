@@ -39,7 +39,7 @@ sheets_auth(email = "cmjonestodd@gmail.com") ## my google sheets auth ****SET YO
 dat.all <- as.data.frame(read_sheet(url,col_names = FALSE))
 names(dat.all) <- c("x1","y1","x2","y2")
 dat.all$slope <- ((500/60)*(dat.all[,2]-dat.all[,4]))/((500/3)*(dat.all[,3] - dat.all[,1]))
-## calculating slope from imprted pixel start and end positions from mousedown and mouse up
+## calculating slope from imported pixel start and end positions from mousedown and mouse up
 dat.all <- unique(dat.all) ## remove duplicates
 dat.all <- na.omit(dat.all) ## remove NA slopes
 
@@ -47,10 +47,10 @@ dat.all <- na.omit(dat.all) ## remove NA slopes
 
 ## grid over plotting area same length as # pixels in canvas y doesn't match up no idea
 grd <- data.frame(x = seq(from = 0, to = 70, length.out = 500), 
-                  y = seq(from = 1, to = 3, length.out = 500))
+                  y = seq(from = 3, to = 0, length.out = 500))
 
 locs.all <- data.frame(x1 = grd$x[dat.all[,1]],x2 = grd$x[dat.all[,3]],
-                       y1 = grd$y[dat.all[,2]],y2 = grd$y[dat.all[,4]])
+                       y2 = grd$y[dat.all[,2]],y1 = grd$y[dat.all[,4]])
 locs.all$transition <- 1:nrow(locs.all)
 
 ## gif
