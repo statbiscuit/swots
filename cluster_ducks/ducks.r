@@ -35,5 +35,5 @@ ggplot(cluster_ducks, aes(x = av_red, y = av_green, color = attire)) +
 ggplot(cluster_ducks, aes(x = av_red, y = av_blue, color = attire)) +
     geom_point()
 
-ggplot(cluster_ducks, aes(x = prop_blue, y = prop_green, color = attire)) +
+ggplot(cluster_ducks, aes(x = prop_blue, y = prop_red, color = attire)) +
     geom_point()
