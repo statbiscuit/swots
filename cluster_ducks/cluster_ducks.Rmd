@@ -1,0 +1,86 @@
+---
+title: "ClusterDucks"
+output: rmdformats::readthedown
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE)
+```
+
+## The Data
+
+![](https://raw.githubusercontent.com/cmjt/statbiscuits/master/cluster_ducks/images/blue_flowers-2.jpg){width=30%} ![](https://raw.githubusercontent.com/cmjt/statbiscuits/master/cluster_ducks/images/patterns-2.jpg){width=30%} ![](https://raw.githubusercontent.com/cmjt/statbiscuits/master/cluster_ducks/images/bridal-1.jpg){width=30%}
+
+
+All images used here are available [here](https://github.com/cmjt/statbiscuits/tree/master/cluster_ducks/images). To read images into R you can use the `readJPEG()` function from the `R` package `jpeg`. Using `readJPEG` each image is read in as a $m*n*3* array, where each of the three $m*n$ matricies are the red, green, and blue values (RGB values) of each pixel respectivly. 
+
+
+```{r read in images, eval = FALSE, echo = FALSE}
+library(jpeg) 
+## list images
+pics <- list.files("images",full = TRUE)
+## read in rgb values of all the images
+duck_rgbs <- lapply(pics, jpeg::readJPEG)
+names(duck_rgbs) <- stringr::str_match(pics,"images/(.*?).jp"
+```
+
+For ease, however, we're going to download the RGB data dirctly from GitHub. The `duck_rgbs` 
+
+```{r get data}
+data_url <- "https://github.com/cmjt/statbiscuits/raw/master/cluster_ducks/duck_rgbs.RData"
+load(url(data_url))
+str(duck_rgbs)
+```
+
+
+```{r average}
+cluster_ducks <- data.frame(attire  = stringr::str_match(names(duck_rgbs),"(.*?)-")[,2],
+                            av_red = sapply(duck_rgbs, function(x) mean(c(x[,,1]))),
+                            av_green = sapply(duck_rgbs, function(x) mean(c(x[,,2]))),
+                            av_blue = sapply(duck_rgbs, function(x) mean(c(x[,,3]))))
+
+head(cluster_ducks)
+```
+
+```{r function proportion}
+prop.max <- function(x){
+    ## matrix of index of max RGB values of x
+    mat_max <- apply(x,c(1,2),which.max)
+    ## table of collapsed values
+    tab <- table(c(mat_max))
+    ## proportion of red
+    prop_red <- tab[1]/sum(tab)
+    prop_green <- tab[2]/sum(tab)
+    prop_blue <- tab[3]/sum(tab)
+    return(c(prop_red,prop_green,prop_blue))
+}
+## proportion of r, g, b in each image
+prop <- do.call('rbind',lapply(rgbs,prop.max))
+cluster_ducks$prop_red <- prop[,1]
+cluster_ducks$prop_green <- prop[,2]
+cluster_ducks$prop_blue <- prop[,3]
+```
+
+```{r plotly2,fig.cap = "3D scatterplot of the average RGB value per image"}
+plot_ly(x = cluster_ducks$av_red, y = cluster_ducks$av_green, z = cluster_ducks$av_blue,
+        type = "scatter3d", mode = "markers", color = cluster_ducks$attire)
+```
+
+
+```{r plotly,fig.cap = "3D scatterplot of the proportion of RGB value per image"}
+plot_ly(x = cluster_ducks$prop_red, y = cluster_ducks$prop_green, z = cluster_ducks$prop_blue,
+        type = "scatter3d", mode = "markers", color = cluster_ducks$attire)
+```
+
+```{r kmeans, eval = FALSE, echo = FALSE}
+## k means clustering
+library(factoextra)
+df <- cluster_ducks[,2:7];rownames(df) <- stringr::str_match(pics,"images/(.*?).jp")[,2]
+distance <- get_dist(df)
+fviz_dist(distance, gradient = list(low = "#00AFBB", mid = "white", high = "#FC4E07"))
+
+
+k2 <- kmeans(df, centers = 6, nstart = 25)
+
+fviz_cluster(k2, data = df)
+```
