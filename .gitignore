@@ -1,4 +1,5 @@
 ./*.png
 ./*.gif
 cluster_ducks/cluster_ducks_cache/
+cluster_ducks/cluster_ducks_files/
 cluster_ducks/cluster_ducks.html

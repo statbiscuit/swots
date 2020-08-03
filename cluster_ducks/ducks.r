@@ -8,16 +8,18 @@ library(ggplot2)
 library(patchwork)
 m <- reshape2::melt(t(apply(duck_rgbs[[1]][,,1],2,rev)))
 r <- ggplot(m, aes(x = Var1, y = Var2, fill = value)) +
-    geom_tile() + scale_fill_distiller(palette = "Reds") +
+    geom_tile() + scale_fill_distiller(palette = "Reds", direction = 1) +
     theme_void() + theme(legend.position = "none")
 m <- reshape2::melt(t(apply(duck_rgbs[[1]][,,2],2,rev)))
 g <- ggplot(m, aes(x = Var1, y = Var2, fill = value)) +
-    geom_tile() + scale_fill_distiller(palette = "Greens") +
+    geom_tile() + scale_fill_distiller(palette = "Greens", direction = 1) +
     theme_void() + theme(legend.position = "none")
 m <- reshape2::melt(t(apply(duck_rgbs[[1]][,,3],2,rev)))
 b <- ggplot(m, aes(x = Var1, y = Var2, fill = value)) +
-    geom_tile() + scale_fill_distiller(palette = "Blues") +
+    geom_tile() + scale_fill_distiller(palette = "Blues", direction = 1) +
     theme_void() + theme(legend.position = "none")
+
+r + g + b
 
 cluster_ducks <- data.frame(attire  = stringr::str_match(names(duck_rgbs),"(.*?)-")[,2],
                             av_red = sapply(duck_rgbs, function(x) mean(c(x[,,1]))),
@@ -39,7 +41,7 @@ prop.max <- function(x){
     return(c(prop_red,prop_green,prop_blue))
 }
 ## proportion of r, g, b in each image
-prop <- do.call('rbind',lapply(rgbs,prop.max))
+prop <- do.call('rbind',lapply(duck_rgbs,prop.max))
 cluster_ducks$prop_red <- prop[,1]
 cluster_ducks$prop_green <- prop[,2]
 cluster_ducks$prop_blue <- prop[,3]
