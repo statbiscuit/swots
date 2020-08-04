@@ -54,6 +54,7 @@ load(url(data_url))
 ```
 
 ```{r rgb1, echo = FALSE, fig.width=15,fig.height = 7, fig.cap = "RGB arrays for the first image (element) of the `ducks_rgbs` object. The image is of a duck in the 'blue flowers' outfit."}
+library(ggplot2)
 library(patchwork)
 load("duck_rgbs.RData")
 m <- reshape2::melt(t(apply(duck_rgbs[[1]][,,1],2,rev)))
