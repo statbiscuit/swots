@@ -1,11 +1,10 @@
 ---
 title: "ClusterDucks"
 featuredImage: "https://raw.githubusercontent.com/cmjt/statbiscuits/master/cluster_ducks/images/blue_flowers-2.jpg"
-always_allow_html: true
 output: 
-  md_document:
+  rmdformats::readthedown:
     toc_depth: 4
-    #highlight: tango
+    highlight: tango
       
 ---
 
