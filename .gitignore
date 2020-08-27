@@ -1,5 +1,4 @@
-./*.png
-./*.gif
-cluster_ducks/cluster_ducks_cache/
-cluster_ducks/cluster_ducks_files/
-cluster_ducks/cluster_ducks.html
+probable/rsconnect/*
+swots/cluster_ducks/cluster_ducks_cache/
+swots/cluster_ducks/cluster_ducks_files/
+swots/cluster_ducks/cluster_ducks.html
