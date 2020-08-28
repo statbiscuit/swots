@@ -11,7 +11,13 @@ Feel free to fork and modify for your own use or just download the gifs :-)
 
 # Selection of GIFs
 
-## Linear models & line of best fit
+## Linear models
+
+![](figs_n_gifs/lm.gif)
+
+*[`R` script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/lm.r)*
+
+### Draw your own line of best fit
 
 This works in conjunction with a Google Apps Script I made that allows students to draw their best line of fit online (mouseclicks only) and submit it to a shared Google Sheet. The `R` script then pulls all the start and end points of their drawn lines and creates a gif showing the distribution of all their estimates.
 
@@ -24,6 +30,40 @@ This works in conjunction with a Google Apps Script I made that allows students 
 
 *[`R` side code can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/app_lm_plot.r)*
 
+### t-tests
+
+GIFs in this section inspired by some found [here](https://crumplab.github.io/statistics/gifs.html).
+
+![](figs_n_gifs/one_sample_ttest.gif)
+
+*[`R` script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/t_tests.r)*
+
+![](figs_n_gifs/ind_two_sample_ttest.gif)
+
+*[`R` script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/t_tests.r)*
+
+### ANOVA
+
+GIFs in this section inspired by some found [here](https://crumplab.github.io/statistics/gifs.html).
+
+![](figs_n_gifs/anova.gif)
+
+*[`R` script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/anova.r)*
+
+## Hypothesis testing
+
+### Coin flip (binomial)
+
+![](figs_n_gifs/binomial_cat.gif)
+
+*[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/weird_coin.r)*
+
+### Randomization test
+
+![](figs_n_gifs/randomisation.gif)
+
+*[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/randomisation.r)*
+
 ## Principal component analysis
 
 ![](figs_n_gifs/pca.gif)
@@ -32,20 +72,13 @@ This works in conjunction with a Google Apps Script I made that allows students 
 
 *[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/pca.r)*
 
-## Hypothesis testing (coin flip)
-
-![](figs_n_gifs/binomial_cat.gif)
-
-*[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/weird_coin.r)*
-
-
 ## Maximum likelihood (binomial example)
 
 ![](figs_n_gifs/mle.gif)
 
 *[`R`script can be found here](https://github.com/cmjt/statbiscuits/blob/master/r_scripts/mle.r)*
 
-## Illustrating things I found a few students struggled with...
+## Illustrating things I've found a few students struggle with...
 
 ### Distribution shape as sample size increases and variance
 
