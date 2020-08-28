@@ -1,7 +1,7 @@
 library(png)
 library(animation)
 
-bread <- readPNG("figs/original.png")
+bread <- readPNG("img/original.png")
 
 ## bread plot, axes rotating
 l.sim <- 30
@@ -78,8 +78,10 @@ points(x,y,pch = 20)
 dev.off()
 
 ## rotating line
-h <- c(seq(135,165,length.out = 30),seq(165,135,length.out = 30),seq(135,105,length.out = 30),seq(105,135,length.out = 30))
-t <- c(seq(315,345,length.out = 30),seq(345,315,length.out = 30),seq(315,285,length.out = 30),seq(285,315,length.out = 30))
+h <- c(seq(135,165,length.out = 30),seq(165,135,length.out = 30),
+       seq(135,105,length.out = 30),seq(105,135,length.out = 30))
+t <- c(seq(315,345,length.out = 30),seq(345,315,length.out = 30),
+       seq(315,285,length.out = 30),seq(285,315,length.out = 30))
 ani.options(interval = 0.2)
 saveGIF(
     for(i in 1:length(h)){

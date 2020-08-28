@@ -1,4 +1,6 @@
+## Some packages available via github only
 ## devtools::install_github("tidyverse/googlesheets4")
+## devtools::install_github("dill/emoGG")
 library(googlesheets4)
 library(ggplot2)
 library(emoGG)
@@ -11,26 +13,25 @@ data <- data.frame(weight = rnorm(10,2,0.5))
 data$egg <- 20*data$weight + rnorm(10, 0, 10)
 
 ## original plot
-## p <- ggplot(data, aes(x = egg, y = weight)) +
-##    # annotation_custom(g, -Inf, Inf, -Inf, Inf)  +
-##     geom_point() +
-##     xlab("weight of egg (g)") + ylab("weight of chicken (kg)") +
-##     ylim(c(0,3)) + xlim(c(0,70)) + geom_emoji(emoji = "1f95a") +
-##     theme(axis.line=element_blank(),
-##           axis.line.x = element_line(color="black", size = 2),
-##           axis.line.y = element_line(color="black", size = 2),
-##           legend.position="none",
-##           panel.background=element_blank(),
-##           panel.border=element_blank(),
-##           panel.grid.major=element_blank(),
-##           panel.grid.minor=element_blank(),
-##           plot.background=element_blank(),
-##           axis.title.y = element_text(size = rel(1)),
-##           axis.title.x = element_text(size = rel(1)),
-##           text = element_text(size=20))
-## png("egg_lm.png",height = 500, width = 500)
-## p
-## dev.off()
+p <- ggplot(data, aes(x = egg, y = weight)) +
+   # annotation_custom(g, -Inf, Inf, -Inf, Inf)  +
+    geom_point() +
+    xlab("weight of egg (g)") + ylab("weight of chicken (kg)") +
+    ylim(c(0,3)) + xlim(c(0,70)) + geom_emoji(emoji = "1f95a") +
+    theme(axis.line=element_blank(),
+          axis.line.x = element_line(color="black", size = 2),
+          axis.line.y = element_line(color="black", size = 2),
+          legend.position="none",
+          panel.background=element_blank(),
+          panel.border=element_blank(),
+          panel.grid.major=element_blank(),
+          panel.grid.minor=element_blank(),
+          plot.background=element_blank(),
+          axis.title.y = element_text(size = rel(1)),
+          axis.title.x = element_text(size = rel(1)),
+          text = element_text(size=20))
+p
+
 
 
 ## read in coords from google sheet

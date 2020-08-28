@@ -1,6 +1,6 @@
 library(png)
 require(animation)
-pngs <- list.files("figs/","coin",full = TRUE)
+pngs <- list.files("img/","coin",full = TRUE)
 imgs <- lapply(pngs,png::readPNG)
 
 ani.options(interval = 0.5,ani.width = 1800, ani.height = 900)

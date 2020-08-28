@@ -8,7 +8,7 @@ dl <- function(x,n,p){
     choose(n,x)*p^(x-1)*(1 - p)^(n - x - 1)*(x - n*p)
 }
 
-pngs <- list.files("figs/",pattern = "mle_pics",full = TRUE)
+pngs <- list.files("img/",pattern = "mle_pics",full = TRUE)
 imgs <- lapply(pngs,png::readPNG)
 
 ## Binomial params
@@ -22,7 +22,7 @@ p.new <- c(p[1:idx],rep(mle,15),p[idx:length(p)]) ## spend 16 at hill peak
 idx.plt <- rep(1:4,times = length(p)/4)
 idx.plt <- c(idx.plt[1:(idx-1)],rep(5:12,times = 2),idx.plt[idx:length(p)])
 
-ani.options(interval = 0.1)
+ani.options(interval = 0.4)
 saveGIF(
     for(i in 1: length(p.new)){
         layout(matrix(c(1,1,1,2,2,2,2,2,2),ncol = 3,byrow = TRUE))

@@ -1,9 +1,9 @@
 # Overview
 
-[I](https://cmjt.github.io/) spend my time teaching stats, coding—then fixing—bugs, pandering to my pets, and making gin. This repo contains
+This repo contains
 
  - [`R` scripts](https://github.com/cmjt/statbiscuits/tree/master/r_scripts) to make stats related [.gifs](https://github.com/cmjt/statbiscuits/tree/master/figs_n_gifs)
- - [**s**tatbiscuits **wor**ksheet**s**](https://cmjt.github.io/statbiscuits/) that go hand in hand with courses I teach (see [source code here](https://github.com/cmjt/statbiscuits/tree/master/swots))
+ - [**s**tatbiscuits **wor**ksheet**s**](https://cmjt.github.io/statbiscuits/) (swots) that go hand in hand with courses I teach ([source code here](https://github.com/cmjt/statbiscuits/tree/master/swots))
  - [source code](https://github.com/cmjt/statbiscuits/tree/master/probable) for a simple RShiny application that allows students to explore the shapes of probability distributions: [probable](https://cmjt.shinyapps.io/probable)
 
 Feel free to fork and modify for your own use or just download the gifs :-)
