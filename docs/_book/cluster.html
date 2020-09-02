@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Cluster Analysis | Statbiscuit worksheets</title>
+  <meta name="description" content="Worksheets based on some elements of the courses I teach" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Cluster Analysis | Statbiscuit worksheets" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Worksheets based on some elements of the courses I teach" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Cluster Analysis | Statbiscuit worksheets" />
+  
+  <meta name="twitter:description" content="Worksheets based on some elements of the courses I teach" />
+  
+
+<meta name="author" content="Charlotte M. Jones-Todd" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="dataviz.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/bootstrap-select-1.12.1/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-select-1.12.1/dist/js/bootstrap-select.min.js"></script>
+<script src="libs/bsselect-binding-0.1.0/bsselect.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>1</b> Data Vizulatisation</a></li>
+<li class="chapter" data-level="2" data-path="cluster.html"><a href="cluster.html"><i class="fa fa-check"></i><b>2</b> Cluster Analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="cluster.html"><a href="cluster.html#clusterducks"><i class="fa fa-check"></i><b>2.1</b> ClusterDucks</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="cluster.html"><a href="cluster.html#k-means-clustering"><i class="fa fa-check"></i><b>2.1.1</b> K means clustering</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statbiscuit worksheets</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cluster" class="section level1">
+<h1><span class="header-section-number">2</span> Cluster Analysis</h1>
+<div id="clusterducks" class="section level2">
+<h2><span class="header-section-number">2.1</span> ClusterDucks</h2>
+<p>In Sydney, the ducks have their own <a href="https://mymodernmet.com/australian-pied-piper-duck-show/">fashion show</a>....</p>
+<p><em>Use the drop-down menu to explore the collection of duck outfits.</em></p>
+
+<html>
+<select id="Psw2WtYSxS" class="selectpicker" data-dropdown-align-right="false" data-dropup-auto="true" data-header="false" data-live-search="true" data-live-search-style="contains" data-show-tick="true" data-width="false" data-size="5"><option value="images/blue_flowers-1.jpeg">blue_flowers-1</option>
+<option value="images/blue_flowers-2.jpg" selected>blue_flowers-2</option>
+<option value="images/blue_flowers-3.jpeg">blue_flowers-3</option>
+<option value="images/blue_flowers-4.jpeg">blue_flowers-4</option>
+<option value="images/blue_flowers-5.jpeg">blue_flowers-5</option>
+<option value="images/bridal-1.jpg">bridal-1</option>
+<option value="images/bridal-2.jpeg">bridal-2</option>
+<option value="images/bridal-3.jpg">bridal-3</option>
+<option value="images/bridal-4.jpg">bridal-4</option>
+<option value="images/bridal-5.jpeg">bridal-5</option>
+<option value="images/bridal-6.jpg">bridal-6</option>
+<option value="images/bridal-7.jpg">bridal-7</option>
+<option value="images/patterns-1.jpg">patterns-1</option>
+<option value="images/patterns-2.jpg">patterns-2</option>
+<option value="images/patterns-3.jpg">patterns-3</option>
+<option value="images/patterns-4.jpeg">patterns-4</option>
+<option value="images/pink_check-1.jpg">pink_check-1</option>
+<option value="images/pink_check-2.jpg">pink_check-2</option>
+<option value="images/pink_check-3.jpeg">pink_check-3</option>
+<option value="images/pink_check-4.jpeg">pink_check-4</option>
+<option value="images/red-1.jpeg">red-1</option>
+<option value="images/red-2.jpeg">red-2</option>
+<option value="images/red-3.jpeg">red-3</option>
+<option value="images/red-4.jpeg">red-4</option>
+<option value="images/red-5.jpg">red-5</option>
+<option value="images/red-6.jpeg">red-6</option>
+<option value="images/wax_jacket-1.jpg">wax_jacket-1</option>
+<option value="images/wax_jacket-2.jpeg">wax_jacket-2</option>
+<option value="images/wax_jacket-3.jpg">wax_jacket-3</option></select>
+<img src="images/blue_flowers-2.jpg" name="gZ6tF2Kxtg" height="500" width="30%"/>
+<script>$(document).ready(function(){
+                 $("#Psw2WtYSxS").change(function(){
+                 $("img[name=gZ6tF2Kxtg]").attr("src",$(this).val());
+
+                 });
+
+  });</script>
+</html>
+<div id="htmlwidget-37171d982051b93d1529" style="width:672px;height:50px;" class="bsselect html-widget" width="672" height="50"></div>
+<script type="application/json" data-for="htmlwidget-37171d982051b93d1529">{"x":[],"evals":[],"jsHooks":[]}</script>
+<p>All images used here are available <a href="https://github.com/cmjt/statbiscuits/tree/master/swots/cluster_ducks/images">here</a>. To read images into R you can use the <code>readJPEG()</code> function from the <code>R</code> package <code>jpeg</code>. Using <code>readJPEG</code> each image is read in as a <span class="math inline">\(m*n*3\)</span> array, where each of the three <span class="math inline">\(m*n\)</span> matricies are the red, green, and blue primary values (R, G, &amp; B values) of each pixel respectivly.</p>
+<p>For ease, however, we're going to download the RGB data directly from GitHub.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_url &lt;-<span class="st"> &quot;https://github.com/cmjt/statbiscuits/raw/master/cluster_ducks/duck_rgbs.RData&quot;</span>
+<span class="kw">load</span>(<span class="kw">url</span>(data_url))</code></pre></div>
+<div class="figure"><span id="fig:rgb1"></span>
+<img src="docs_files/figure-html/rgb1-1.png" alt="RGB arrays for the first image (element) of the `ducks_rgbs` object. The image is of a duck in the 'blue flowers' outfit." width="1440" />
+<p class="caption">
+Figure 2.1: RGB arrays for the first image (element) of the <code>ducks_rgbs</code> object. The image is of a duck in the 'blue flowers' outfit.
+</p>
+</div>
+<div class="figure"><span id="fig:rgb2"></span>
+<img src="docs_files/figure-html/rgb2-1.png" alt="RGB arrays for the second image (element) of the `ducks_rgbs` object. The image is of a duck in the 'blue flowers' outfit." width="1440" />
+<p class="caption">
+Figure 2.2: RGB arrays for the second image (element) of the <code>ducks_rgbs</code> object. The image is of a duck in the 'blue flowers' outfit.
+</p>
+</div>
+<p>The <code>duck_rgbs</code> object is a named list of RGB arrays for each image. There are 29 different images of 6 different outfits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(duck_rgbs)
+## [1] 29
+<span class="kw">names</span>(duck_rgbs)
+##  [1] &quot;blue_flowers-1&quot; &quot;blue_flowers-2&quot; &quot;blue_flowers-3&quot; &quot;blue_flowers-4&quot;
+##  [5] &quot;blue_flowers-5&quot; &quot;bridal-1&quot;       &quot;bridal-2&quot;       &quot;bridal-3&quot;      
+##  [9] &quot;bridal-4&quot;       &quot;bridal-5&quot;       &quot;bridal-6&quot;       &quot;bridal-7&quot;      
+## [13] &quot;patterns-1&quot;     &quot;patterns-2&quot;     &quot;patterns-3&quot;     &quot;patterns-4&quot;    
+## [17] &quot;pink_check-1&quot;   &quot;pink_check-2&quot;   &quot;pink_check-3&quot;   &quot;pink_check-4&quot;  
+## [21] &quot;red-1&quot;          &quot;red-2&quot;          &quot;red-3&quot;          &quot;red-4&quot;         
+## [25] &quot;red-5&quot;          &quot;red-6&quot;          &quot;wax_jacket-1&quot;   &quot;wax_jacket-2&quot;  
+## [29] &quot;wax_jacket-3&quot;</code></pre></div>
+<p>Let's summarise each image by the average R, G, and B value respectively.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cluster_ducks &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">attire  =</span> stringr<span class="op">::</span><span class="kw">str_match</span>(<span class="kw">names</span>(duck_rgbs),<span class="st">&quot;(.*?)-&quot;</span>)[,<span class="dv">2</span>],
+                            <span class="dt">av_red =</span> <span class="kw">sapply</span>(duck_rgbs, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="kw">c</span>(x[,,<span class="dv">1</span>]))),
+                            <span class="dt">av_green =</span> <span class="kw">sapply</span>(duck_rgbs, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="kw">c</span>(x[,,<span class="dv">2</span>]))),
+                            <span class="dt">av_blue =</span> <span class="kw">sapply</span>(duck_rgbs, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="kw">c</span>(x[,,<span class="dv">3</span>]))))
+
+<span class="kw">head</span>(cluster_ducks)
+##                      attire    av_red  av_green   av_blue
+## blue_flowers-1 blue_flowers 0.4529505 0.4790429 0.4610547
+## blue_flowers-2 blue_flowers 0.4751319 0.5131624 0.4977116
+## blue_flowers-3 blue_flowers 0.4560981 0.4881459 0.4919892
+## blue_flowers-4 blue_flowers 0.4745254 0.5117347 0.4948642
+## blue_flowers-5 blue_flowers 0.5955183 0.6413420 0.5757063
+## bridal-1             bridal 0.5718594 0.5645125 0.4567448
+<span class="kw">table</span>(cluster_ducks<span class="op">$</span>attire)
+## 
+## blue_flowers       bridal     patterns   pink_check          red   wax_jacket 
+##            5            7            4            4            6            3</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plotly) ## for 3D interactive plots</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_ly</span>(<span class="dt">x =</span> cluster_ducks<span class="op">$</span>av_red, <span class="dt">y =</span> cluster_ducks<span class="op">$</span>av_green, 
+        <span class="dt">z =</span> cluster_ducks<span class="op">$</span>av_blue,
+        <span class="dt">type =</span> <span class="st">&quot;scatter3d&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;markers&quot;</span>, 
+        <span class="dt">color =</span> cluster_ducks<span class="op">$</span>attire)</code></pre></div>
+<div class="figure"><span id="fig:plotly2"></span>
+<div id="htmlwidget-99a7b72a986b3a20ecce" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-99a7b72a986b3a20ecce">{"x":{"visdat":{"686b7062b12d":["function () ","plotlyVisDat"]},"cur_data":"686b7062b12d","attrs":{"686b7062b12d":{"x":[0.452950487674294,0.475131901679788,0.456098089299577,0.474525372909701,0.595518315853473,0.571859423822404,0.548290875512363,0.461976449541504,0.481079914013067,0.437996326598764,0.457944839166612,0.403088482682793,0.504802255410931,0.470760474532799,0.457738963823059,0.46800988173047,0.668916256922405,0.733485044052562,0.639871478002966,0.678572505925447,0.494195146906114,0.563255480371304,0.425367030735071,0.483720056616557,0.442555077527465,0.567232170097932,0.383322386826951,0.384206248805703,0.395447712346859],"y":[0.479042937581311,0.513162433461766,0.488145894373075,0.511734735580198,0.641342040692246,0.564512496500397,0.51883610900318,0.450825953953503,0.492575770856509,0.481165273589817,0.483836655559188,0.442602070734836,0.442609294182949,0.398087469879563,0.361938154714879,0.409232804232804,0.531884867961436,0.554768209077248,0.520815730213654,0.523191481720893,0.343360591900312,0.361570842640205,0.189140455013933,0.393314429204228,0.409872488179669,0.306391134143774,0.451479760255379,0.42232257679584,0.452845887059544],"z":[0.461054726599781,0.497711576898592,0.491989206921594,0.494864180039779,0.575706251492845,0.456744770731304,0.439735474991772,0.386626000631402,0.397371335865323,0.437424297486569,0.402850274640448,0.380299248671431,0.393100042446208,0.274626046307254,0.249183725871101,0.280174758792406,0.473485077324675,0.602344866015356,0.443726259131103,0.484964447317388,0.341210830126443,0.267390978846994,0.188142686503544,0.200742780861917,0.208620019816437,0.30988298891768,0.24186536304146,0.248711690770309,0.262346022728003],"mode":"markers","color":["blue_flowers","blue_flowers","blue_flowers","blue_flowers","blue_flowers","bridal","bridal","bridal","bridal","bridal","bridal","bridal","patterns","patterns","patterns","patterns","pink_check","pink_check","pink_check","pink_check","red","red","red","red","red","red","wax_jacket","wax_jacket","wax_jacket"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[0.452950487674294,0.475131901679788,0.456098089299577,0.474525372909701,0.595518315853473],"y":[0.479042937581311,0.513162433461766,0.488145894373075,0.511734735580198,0.641342040692246],"z":[0.461054726599781,0.497711576898592,0.491989206921594,0.494864180039779,0.575706251492845],"mode":"markers","type":"scatter3d","name":"blue_flowers","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[0.571859423822404,0.548290875512363,0.461976449541504,0.481079914013067,0.437996326598764,0.457944839166612,0.403088482682793],"y":[0.564512496500397,0.51883610900318,0.450825953953503,0.492575770856509,0.481165273589817,0.483836655559188,0.442602070734836],"z":[0.456744770731304,0.439735474991772,0.386626000631402,0.397371335865323,0.437424297486569,0.402850274640448,0.380299248671431],"mode":"markers","type":"scatter3d","name":"bridal","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"line":{"color":"rgba(252,141,98,1)"},"frame":null},{"x":[0.504802255410931,0.470760474532799,0.457738963823059,0.46800988173047],"y":[0.442609294182949,0.398087469879563,0.361938154714879,0.409232804232804],"z":[0.393100042446208,0.274626046307254,0.249183725871101,0.280174758792406],"mode":"markers","type":"scatter3d","name":"patterns","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null},{"x":[0.668916256922405,0.733485044052562,0.639871478002966,0.678572505925447],"y":[0.531884867961436,0.554768209077248,0.520815730213654,0.523191481720893],"z":[0.473485077324675,0.602344866015356,0.443726259131103,0.484964447317388],"mode":"markers","type":"scatter3d","name":"pink_check","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"line":{"color":"rgba(231,138,195,1)"},"frame":null},{"x":[0.494195146906114,0.563255480371304,0.425367030735071,0.483720056616557,0.442555077527465,0.567232170097932],"y":[0.343360591900312,0.361570842640205,0.189140455013933,0.393314429204228,0.409872488179669,0.306391134143774],"z":[0.341210830126443,0.267390978846994,0.188142686503544,0.200742780861917,0.208620019816437,0.30988298891768],"mode":"markers","type":"scatter3d","name":"red","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"line":{"color":"rgba(166,216,84,1)"},"frame":null},{"x":[0.383322386826951,0.384206248805703,0.395447712346859],"y":[0.451479760255379,0.42232257679584,0.452845887059544],"z":[0.24186536304146,0.248711690770309,0.262346022728003],"mode":"markers","type":"scatter3d","name":"wax_jacket","marker":{"color":"rgba(255,217,47,1)","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)"},"error_y":{"color":"rgba(255,217,47,1)"},"error_x":{"color":"rgba(255,217,47,1)"},"line":{"color":"rgba(255,217,47,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.3: 3D scatterplot of the average RGB value per image.
+</p>
+</div>
+<p>Rather than the average R, G, &amp; B let's calculate the proportion of each primary.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop.max &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+    ## matrix of index of max RGB values of x
+    mat_max &lt;-<span class="st"> </span><span class="kw">apply</span>(x,<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>),which.max)
+    ## table of collapsed values
+    tab &lt;-<span class="st"> </span><span class="kw">table</span>(<span class="kw">c</span>(mat_max))
+    ## proportion of red
+    prop_red &lt;-<span class="st"> </span>tab[<span class="dv">1</span>]<span class="op">/</span><span class="kw">sum</span>(tab)
+    prop_green &lt;-<span class="st"> </span>tab[<span class="dv">2</span>]<span class="op">/</span><span class="kw">sum</span>(tab)
+    prop_blue &lt;-<span class="st"> </span>tab[<span class="dv">3</span>]<span class="op">/</span><span class="kw">sum</span>(tab)
+    <span class="kw">return</span>(<span class="kw">c</span>(prop_red,prop_green,prop_blue))
+}
+## proportion of r, g, b in each image
+prop &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&#39;rbind&#39;</span>,<span class="kw">lapply</span>(duck_rgbs,prop.max))
+cluster_ducks<span class="op">$</span>prop_red &lt;-<span class="st"> </span>prop[,<span class="dv">1</span>]
+cluster_ducks<span class="op">$</span>prop_green &lt;-<span class="st"> </span>prop[,<span class="dv">2</span>]
+cluster_ducks<span class="op">$</span>prop_blue &lt;-<span class="st"> </span>prop[,<span class="dv">3</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot_ly</span>(<span class="dt">x =</span> cluster_ducks<span class="op">$</span>prop_red, <span class="dt">y =</span> cluster_ducks<span class="op">$</span>prop_green, 
+        <span class="dt">z =</span> cluster_ducks<span class="op">$</span>prop_blue,
+        <span class="dt">type =</span> <span class="st">&quot;scatter3d&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;markers&quot;</span>, 
+        <span class="dt">color =</span> cluster_ducks<span class="op">$</span>attire)</code></pre></div>
+<div class="figure"><span id="fig:plotly"></span>
+<div id="htmlwidget-58c442461e3c506fe98f" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-58c442461e3c506fe98f">{"x":{"visdat":{"686ba5c70bf":["function () ","plotlyVisDat"]},"cur_data":"686ba5c70bf","attrs":{"686ba5c70bf":{"x":[0.193279250758475,0.0779532021698648,0.280779054916986,0.0763911863958182,0.10218715393134,0.455457902269028,0.767596060479956,0.405474520431479,0.349585070462724,0.0613791951911838,0.192505004129282,0.0752079439252336,0.424258007640317,0.514611824411013,0.624012969407292,0.49922619047619,0.625455265241489,0.901318425343583,0.596134453781513,0.741529304029304,0.769567757009346,0.692806583214199,0.762238400389358,0.405046999983709,0.30072695035461,0.884067499452115,0.120334022848009,0.245939388955138,0.184990053122882],"y":[0.336334256694368,0.289365233584325,0.324584929757344,0.301660821809039,0.376024363233666,0.338548892797448,0.186232487168817,0.35842765290398,0.456040058335843,0.591417598931374,0.622835626600971,0.658992990654206,0.366680135174846,0.424384402649611,0.317862283901444,0.471507936507936,0.358183463409117,0.012569298858607,0.385546218487395,0.243406593406593,0.143691588785047,0.233027650894383,0.0520258760545101,0.576055259599563,0.647617464539007,0.114507999123384,0.86336443984768,0.742218018833011,0.804822595807009],"z":[0.470386492547157,0.63268156424581,0.39463601532567,0.621947991795143,0.521788482834994,0.205993204933524,0.0461714523512276,0.236097826664541,0.194374871201433,0.347203205877442,0.184659369269747,0.265799065420561,0.209061857184837,0.0610037729393764,0.0581247466912638,0.029265873015873,0.0163612713493949,0.0861122757978104,0.0183193277310924,0.0150641025641026,0.0867406542056075,0.0741657658914188,0.185735723556132,0.0188977404167278,0.051655585106383,0.00142450142450142,0.016301537304311,0.0118425922118508,0.0101873510701091],"mode":"markers","color":["blue_flowers","blue_flowers","blue_flowers","blue_flowers","blue_flowers","bridal","bridal","bridal","bridal","bridal","bridal","bridal","patterns","patterns","patterns","patterns","pink_check","pink_check","pink_check","pink_check","red","red","red","red","red","red","wax_jacket","wax_jacket","wax_jacket"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":[]},"yaxis":{"title":[]},"zaxis":{"title":[]}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[0.193279250758475,0.0779532021698648,0.280779054916986,0.0763911863958182,0.10218715393134],"y":[0.336334256694368,0.289365233584325,0.324584929757344,0.301660821809039,0.376024363233666],"z":[0.470386492547157,0.63268156424581,0.39463601532567,0.621947991795143,0.521788482834994],"mode":"markers","type":"scatter3d","name":"blue_flowers","marker":{"color":"rgba(102,194,165,1)","line":{"color":"rgba(102,194,165,1)"}},"textfont":{"color":"rgba(102,194,165,1)"},"error_y":{"color":"rgba(102,194,165,1)"},"error_x":{"color":"rgba(102,194,165,1)"},"line":{"color":"rgba(102,194,165,1)"},"frame":null},{"x":[0.455457902269028,0.767596060479956,0.405474520431479,0.349585070462724,0.0613791951911838,0.192505004129282,0.0752079439252336],"y":[0.338548892797448,0.186232487168817,0.35842765290398,0.456040058335843,0.591417598931374,0.622835626600971,0.658992990654206],"z":[0.205993204933524,0.0461714523512276,0.236097826664541,0.194374871201433,0.347203205877442,0.184659369269747,0.265799065420561],"mode":"markers","type":"scatter3d","name":"bridal","marker":{"color":"rgba(252,141,98,1)","line":{"color":"rgba(252,141,98,1)"}},"textfont":{"color":"rgba(252,141,98,1)"},"error_y":{"color":"rgba(252,141,98,1)"},"error_x":{"color":"rgba(252,141,98,1)"},"line":{"color":"rgba(252,141,98,1)"},"frame":null},{"x":[0.424258007640317,0.514611824411013,0.624012969407292,0.49922619047619],"y":[0.366680135174846,0.424384402649611,0.317862283901444,0.471507936507936],"z":[0.209061857184837,0.0610037729393764,0.0581247466912638,0.029265873015873],"mode":"markers","type":"scatter3d","name":"patterns","marker":{"color":"rgba(141,160,203,1)","line":{"color":"rgba(141,160,203,1)"}},"textfont":{"color":"rgba(141,160,203,1)"},"error_y":{"color":"rgba(141,160,203,1)"},"error_x":{"color":"rgba(141,160,203,1)"},"line":{"color":"rgba(141,160,203,1)"},"frame":null},{"x":[0.625455265241489,0.901318425343583,0.596134453781513,0.741529304029304],"y":[0.358183463409117,0.012569298858607,0.385546218487395,0.243406593406593],"z":[0.0163612713493949,0.0861122757978104,0.0183193277310924,0.0150641025641026],"mode":"markers","type":"scatter3d","name":"pink_check","marker":{"color":"rgba(231,138,195,1)","line":{"color":"rgba(231,138,195,1)"}},"textfont":{"color":"rgba(231,138,195,1)"},"error_y":{"color":"rgba(231,138,195,1)"},"error_x":{"color":"rgba(231,138,195,1)"},"line":{"color":"rgba(231,138,195,1)"},"frame":null},{"x":[0.769567757009346,0.692806583214199,0.762238400389358,0.405046999983709,0.30072695035461,0.884067499452115],"y":[0.143691588785047,0.233027650894383,0.0520258760545101,0.576055259599563,0.647617464539007,0.114507999123384],"z":[0.0867406542056075,0.0741657658914188,0.185735723556132,0.0188977404167278,0.051655585106383,0.00142450142450142],"mode":"markers","type":"scatter3d","name":"red","marker":{"color":"rgba(166,216,84,1)","line":{"color":"rgba(166,216,84,1)"}},"textfont":{"color":"rgba(166,216,84,1)"},"error_y":{"color":"rgba(166,216,84,1)"},"error_x":{"color":"rgba(166,216,84,1)"},"line":{"color":"rgba(166,216,84,1)"},"frame":null},{"x":[0.120334022848009,0.245939388955138,0.184990053122882],"y":[0.86336443984768,0.742218018833011,0.804822595807009],"z":[0.016301537304311,0.0118425922118508,0.0101873510701091],"mode":"markers","type":"scatter3d","name":"wax_jacket","marker":{"color":"rgba(255,217,47,1)","line":{"color":"rgba(255,217,47,1)"}},"textfont":{"color":"rgba(255,217,47,1)"},"error_y":{"color":"rgba(255,217,47,1)"},"error_x":{"color":"rgba(255,217,47,1)"},"line":{"color":"rgba(255,217,47,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Figure 2.4: 3D scatterplot of the proportion of RGB value per image.
+</p>
+</div>
+<div id="k-means-clustering" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> K means clustering</h3>
+<p>Can we cluster the images based on the calculated measures above?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## library for k-means clustering
+<span class="kw">library</span>(factoextra)
+## re format data. We deal only with the numerics info
+df &lt;-<span class="st"> </span>cluster_ducks[,<span class="dv">2</span><span class="op">:</span><span class="dv">7</span>]
+## specify rownames as image names
+<span class="kw">rownames</span>(df) &lt;-<span class="st"> </span><span class="kw">names</span>(duck_rgbs)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">distance &lt;-<span class="st"> </span><span class="kw">get_dist</span>(df)
+<span class="kw">fviz_dist</span>(distance, <span class="dt">gradient =</span> <span class="kw">list</span>(<span class="dt">low =</span> <span class="st">&quot;#00AFBB&quot;</span>, <span class="dt">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;#FC4E07&quot;</span>))</code></pre></div>
+<p><img src="docs_files/figure-html/dist-1.png" width="672" /></p>
+<p>So we have an idea there are 6... but is there enough information in the noisy images?</p>
+<p>Setting <code>nstart = 25</code> means that <code>R</code> will try 25 different random starting assignments and then select the best results corresponding to the one with the lowest within cluster variation.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## from two clusters to 6 (can we separate out the images?)
+<span class="kw">set.seed</span>(<span class="dv">4321</span>)
+k2 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(df, <span class="dt">centers =</span> <span class="dv">2</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)
+k3 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(df, <span class="dt">centers =</span> <span class="dv">3</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)
+k4 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(df, <span class="dt">centers =</span> <span class="dv">4</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)
+k5 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(df, <span class="dt">centers =</span> <span class="dv">5</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)
+k6 &lt;-<span class="st"> </span><span class="kw">kmeans</span>(df, <span class="dt">centers =</span> <span class="dv">6</span>, <span class="dt">nstart =</span> <span class="dv">25</span>)</code></pre></div>
+<p>The <code>kmeans()</code> function returns a list of components:</p>
+<ul>
+<li><code>cluster</code>, integers indicating the cluster to which each observation is allocated</li>
+<li><code>centers</code>, a matrix of cluster centers/means</li>
+<li><code>totss</code>, the total sum of squares</li>
+<li><code>withinss</code>, within-cluster sum of squares, one component per cluster</li>
+<li><code>tot.withinss</code>, total within-cluster sum of squares</li>
+<li><code>betweenss</code>, between-cluster sum of squares</li>
+<li><code>size</code>, number of observations in each cluster</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">k2<span class="op">$</span>tot.withinss
+## [1] 2.786543
+k3<span class="op">$</span>tot.withinss
+## [1] 1.75652
+k4<span class="op">$</span>tot.withinss
+## [1] 1.193151
+k5<span class="op">$</span>tot.withinss
+## [1] 0.9316645
+k6<span class="op">$</span>tot.withinss
+## [1] 0.7281481</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">barplot</span>(<span class="kw">c</span>(k2<span class="op">$</span>tot.withinss,k3<span class="op">$</span>tot.withinss,k4<span class="op">$</span>tot.withinss,
+          k5<span class="op">$</span>tot.withinss,k6<span class="op">$</span>tot.withinss),
+        <span class="dt">names =</span> <span class="kw">paste</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>,<span class="st">&quot; clusters&quot;</span>))</code></pre></div>
+<p><img src="docs_files/figure-html/bar-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span><span class="kw">fviz_cluster</span>(k2, <span class="dt">data =</span> df)
+p3 &lt;-<span class="st"> </span><span class="kw">fviz_cluster</span>(k3, <span class="dt">data =</span> df)
+p4 &lt;-<span class="st"> </span><span class="kw">fviz_cluster</span>(k4, <span class="dt">data =</span> df)
+p5 &lt;-<span class="st"> </span><span class="kw">fviz_cluster</span>(k5, <span class="dt">data =</span> df)
+p6 &lt;-<span class="st"> </span><span class="kw">fviz_cluster</span>(k6, <span class="dt">data =</span> df)
+## for arranging plots
+<span class="kw">library</span>(patchwork) 
+p2<span class="op">/</span><span class="st"> </span>p3<span class="op">/</span><span class="st"> </span>p4<span class="op">/</span><span class="st"> </span>p5<span class="op">/</span><span class="st"> </span>p6</code></pre></div>
+<p><img src="docs_files/figure-html/cluster%20viz-1.png" width="672" /></p>
+<p><strong>How many clusters are best?</strong></p>
+<p>The <code>fviz_nbclust()</code> function in the <code>R</code> package <code>factoextra</code> can be used to compute the three different methods [elbow, silhouette and gap statistic] for any partitioning clustering methods [K-means, K-medoids (PAM), CLARA, HCUT].</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Elbow method</span>
+<span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">method =</span> <span class="st">&quot;wss&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Elbow method&quot;</span>)</code></pre></div>
+<p><img src="docs_files/figure-html/nbclust-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Silhouette method</span>
+<span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">method =</span> <span class="st">&quot;silhouette&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Silhouette method&quot;</span>)</code></pre></div>
+<p><img src="docs_files/figure-html/nbclust-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Gap statistic</span>
+<span class="co"># recommended value: nboot= 500 for your analysis.</span>
+<span class="kw">set.seed</span>(<span class="dv">123</span>)
+<span class="kw">fviz_nbclust</span>(df, kmeans, <span class="dt">nstart =</span> <span class="dv">25</span>,  <span class="dt">method =</span> <span class="st">&quot;gap_stat&quot;</span>, <span class="dt">nboot =</span> <span class="dv">50</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">subtitle =</span> <span class="st">&quot;Gap statistic method&quot;</span>)
+## Clustering k = 1,2,..., K.max (= 10): .. done
+## Bootstrapping, b = 1,2,..., B (= 50)  [one &quot;.&quot; per sample]:
+## .................................................. 50</code></pre></div>
+<p><img src="docs_files/figure-html/nbclust-3.png" width="672" /></p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="dataviz.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

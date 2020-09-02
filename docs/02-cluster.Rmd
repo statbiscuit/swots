@@ -1,0 +1,6 @@
+# Cluster Analysis {#cluster}
+
+
+```{r child = '../swots/cluster_ducks/cluster_ducks.Rmd'}
+```
+
