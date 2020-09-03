@@ -1,0 +1,3 @@
+# Animating Acronyms
+
+Inspired by a recent paper, [Meta-Research: The growth of acronyms in the scientific literature](https://elifesciences.org/articles/60080) (radio interview [here](https://www.rnz.co.nz/national/programmes/sunday/audio/2018760724/from-dna-to-rna-science-s-unhealthy-obsession-with-acronyms)), we aim to use `gganimate` to create an animation of the [data](https://github.com/agbarnett/acronyms) to better vizualize the populatity of certain acronyms in the scientific literature (see similar [animation here](https://github.com/agbarnett/acronyms/tree/master/animation)).

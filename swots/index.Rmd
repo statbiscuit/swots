@@ -1,0 +1,21 @@
+--- 
+title: "Statbiscuit worksheets"
+author: "Charlotte M. Jones-Todd"
+date: ""
+output: 
+  bookdown::gitbook:
+    download:
+      - ["swots.pdf", "PDF"]
+      - ["swots.epub", "EPUB"]
+    sharing:
+      github: yes
+      twitter: yes
+      facebook: no
+  
+
+description: "Worksheets based on some elements of the courses I teach"
+---
+
+# Preface {-}
+
+Hightops
