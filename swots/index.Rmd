@@ -1,6 +1,6 @@
 --- 
-title: "Statbiscuit worksheets"
-author: "Charlotte M. Jones-Todd"
+title: "Worksheets"
+author: "statbiscuits"
 date: ""
 output: 
   bookdown::gitbook:
@@ -18,4 +18,7 @@ description: "Worksheets based on some elements of the courses I teach"
 
 # Preface {-}
 
-Hightops
+
+Work In Progress.
+
+More worksheets will be added.

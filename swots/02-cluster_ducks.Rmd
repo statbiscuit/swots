@@ -2,7 +2,7 @@
 
 In Sydney, the ducks have their own [fashion show](https://mymodernmet.com/australian-pied-piper-duck-show/)....
 
-```{r setup, include=FALSE}
+```{r setup_ducks, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, collapse = TRUE, message = FALSE,warning = FALSE)
 ```
 
@@ -33,10 +33,11 @@ duck_rgbs <- lapply(pics, jpeg::readJPEG)
 names(duck_rgbs) <- stringr::str_match(pics,"images/(.*?).jp"
 ```
 
+## RGB data
 
 For ease, however, we're going to download the RGB data directly from GitHub. 
 
-```{r get data, eval = FALSE}
+```{r get data ducks, eval = FALSE}
 data_url <- "https://github.com/cmjt/statbiscuits/raw/master/swots/data/duck_rgbs.RData"
 load(url(data_url))
 ```
@@ -216,7 +217,7 @@ library(patchwork)
 p2/ p3/ p4/ p5/ p6
 ```
 
-**How many clusters are best?**
+### How many clusters are best?
 
 The `fviz_nbclust()` function in the `R` package `factoextra` can be used to compute the three different methods [elbow, silhouette and gap statistic] for any partitioning clustering methods [K-means, K-medoids (PAM), CLARA, HCUT].
 

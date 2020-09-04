@@ -1,3 +1,176 @@
 # Animating Acronyms
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
 
-Inspired by a recent paper, [Meta-Research: The growth of acronyms in the scientific literature](https://elifesciences.org/articles/60080) (radio interview [here](https://www.rnz.co.nz/national/programmes/sunday/audio/2018760724/from-dna-to-rna-science-s-unhealthy-obsession-with-acronyms)), we aim to use `gganimate` to create an animation of the [data](https://github.com/agbarnett/acronyms) to better vizualize the populatity of certain acronyms in the scientific literature (see similar [animation here](https://github.com/agbarnett/acronyms/tree/master/animation)).
+Inspired by the paper, [Meta-Research: The growth of acronyms in the scientific literature](https://elifesciences.org/articles/60080) (radio interview [here](https://www.rnz.co.nz/national/programmes/sunday/audio/2018760724/from-dna-to-rna-science-s-unhealthy-obsession-with-acronyms)), we'll use `gganimate` to create an animation of the top twenty [acronyms used in the titles of scientific publications](https://github.com/agbarnett/acronyms) 1900--2019 (see similar [animation here](https://github.com/agbarnett/acronyms/tree/master/animation)).
+
+If you want download and wrangle to data yourself then feel free to use [this `R` script](https://github.com/cmjt/statbiscuits/blob/master/swots/raw-scripts/raw_acronym.r); however for simplicity we'll download the data we'll need directly from GitHub. 
+
+```{r get data, eval = FALSE}
+data_url <- "https://github.com/cmjt/statbiscuits/raw/master/swots/data/top_twenty.RData"
+
+load(url(data_url))
+```
+
+```{r sneakdata, echo = FALSE}
+load("data/top_twenty.RData")
+```
+
+## Data exploration
+
+The `R` object we've loaded, named `top_twenty`, is a list of length `r length(top_twenty)`, where each element contains a `data.frame` for each year with the following `r ncol(top_twenty)` variables: **`r colnames(top_twenty[[1]])`**.
+
+The name of each element in the list indicate the year of publication.
+
+```{r look}
+names(top_twenty)
+```
+
+The column **`r colnames(top_twenty[[1]])[2]`** contains the top-twenty acronym used in the title of a publication in **`r colnames(top_twenty[[1]])[5]`** identified by **`r colnames(top_twenty[[1]])[1]`** and **`r colnames(top_twenty[[1]])[13]`**. The number of characters in an acronym are given in the **`r colnames(top_twenty[[1]])[3]`** column. Other information relating to the published article is given in the other columns.
+
+```{r look2}
+head(top_twenty[[1]])
+```
+
+
+As you can imagine for the top-twenty acronyms alone there are thousands of observations each year:
+
+```{r look3}
+sapply(top_twenty, nrow)
+```
+Let's look at the top-twenty acronyms in `r names(top_twenty)[1]`:
+
+```{r tabs}
+table(top_twenty[[1]]$acronyms)
+```
+
+## Format the data to suit our porposes
+
+A long list probably isn't the best way to summarise these data
+ - We could combine all the elements into one big `dataframe` (remember we have already have a column specifying year)
+ 
+```{r df}
+library(dplyr)
+df <- bind_rows(top_twenty)
+head(df)
+```
+
+Let's count the acronyms
+ 
+```{r count}
+count <- df %>% count(acronyms)
+head(count)
+```
+
+Not quite what we want, we forgot to group by year...
+ 
+```{r countbyyear}
+count <- df %>% group_by(Year) %>% count(acronyms)
+head(count)
+```
+
+Now let's sort by the most used by year and rank
+
+```{r rankbyyear}
+ranked <- count %>%
+  arrange(Year, -n) %>%
+  mutate(rank = as.factor(1:n()))
+head(ranked)
+```
+
+
+
+## Plotting
+
+Numbers of each acronym by year
+
+```{r gg}
+library(ggplot2)
+ggplot(ranked, aes(x = Year, y = n, col = acronyms)) + geom_line() 
+```
+
+Quite a lot going on... What about a bar graph so we can easily compare acronyms? One thing to note is that as we've already "counted" the acronyms then we need to specify `stat = "identity"` in our call to `geom_bar()` so that `ggplot()` knows to use our data as bar heights. Note also that we can flip `x = ` and `y = ` inside `aes()` to switch the axes.
+ 
+```{r bar1}
+ggplot(ranked, aes(x = n, y = rank, fill = acronyms)) + 
+  geom_bar(stat = "identity")
+```
+
+We've forgotten about year
+
+  - what about using `facet_wrap()`?
+  
+The colours are awful
+
+  - how about a decent palette (e.g., `scale_fill_brewer(palette = "Dark2")`)? See others [here](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/).
+  
+The trouble with the `"Dark2"` palette from `RColorBrewer` is that it only contains 8 different colours and we need 54! No problem we can simply extend the colour palette using the `colorRampPalette()` function from `ColorBrewer`:
+  
+```{r cols}
+## We need 54 colours as there are 54 unique acronyms
+library(RColorBrewer)
+n.cols <- 54
+mycols <- colorRampPalette(brewer.pal(8, "Dark2"))(n.cols)
+head(mycols)
+```
+
+So, we use `facet_wrap()` to create a multi panel plot (splitting by `Year`) and `scale_fill_manual()` to specify our chosen (better) colour palette for the `fill` aesthetic.
+
+```{r bar3, fig.width = 10,fig.height = 8}
+ggplot(ranked, aes(x = n, y = rank, fill = acronyms)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~Year) +
+  scale_fill_manual(values = mycols)
+```
+
+Well there's quite a lot going on there; let's let the axes differ for each year as 
+  - not all counts are the same, and 
+  - not all acronyms turn up each year.
+We can use `scales = "free"` in our `facet_wrap()` call for this.
+
+```{r rank1, fig.width = 10,fig.height = 8}
+ggplot(ranked, aes(x = n, y = rank, fill = acronyms)) +
+  geom_bar(stat = "identity") +
+  facet_wrap(~Year, scales = "free") +
+  scale_fill_manual(values = mycols)
+```
+
+There are a number of issues with this plot; let's sort a few of them out:
+
+  - using `geom_text()` we'll label each bar by the acronym it represents and left justify
+  this text, `hjust = "left"`
+  - we'll suppress the x- and y-axis labels using `xlab("")` and `ylab("")` (is there good reason to do this?)
+  - we'll change the theme to `theme_gray()`, other options discussed [here](https://www.datanovia.com/en/blog/ggplot-themes-gallery/)
+  - in addition to the theme we choose we may want to fine tune some other elements so using `theme()` we'll suppress the y-axis ticks and labels with `axis.text.y = element_blank(),axis.ticks.y = element_blank()` and scrap the needless legend using `legend.position = "none"`. Remember we have the acronym labels now!
+  - finally, to reverse the order of the factor ranks, 1...20, we use `scale_y_discrete()` so that 1 is on top
+
+```{r rank2, fig.width = 15,fig.height = 13}
+plot <- ggplot(ranked, aes(x = n, y = rank, fill = acronyms)) +
+          geom_bar(stat = "identity") +
+          facet_wrap(~Year, scales = "free") +
+          scale_fill_manual(values = mycols) +
+          geom_text(aes(label = acronyms), hjust = "left", col = "darkgrey") +
+          xlab("") + ylab("") + 
+          theme_gray() +
+          theme(axis.text.y = element_blank(),axis.ticks.y = element_blank(),legend.position = "none") +
+          scale_y_discrete(limits = rev(levels(ranked$rank)))
+
+plot
+```
+
+
+There's still a lot going on! So let's us `gganimate` to create a racing barchart!
+
+It's as simple as adding ` + transition_time()`! Although we do have to use `facet_null()` to forget the `facet_wrap()` stuff (for reasons only ggplot2 wizards know). Let's also add a title specifying year using `labs()`.
+
+```{r gganimate1,eval = FALSE}
+library(gganimate)
+anim <- plot +  
+  transition_time(Year) +
+  facet_null()  + ## we have to forget facet stuff for reasons only ggplot2 wizards know
+  labs(title = "Year: {frame_time}") 
+anim
+```
+
+![](images/acronyms.gif)
