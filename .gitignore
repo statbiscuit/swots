@@ -1,6 +1,4 @@
 probable/rsconnect/*
-swots/cluster_ducks/cluster_ducks_cache/
-swots/cluster_ducks/cluster_ducks_files/
-swots/cluster_ducks/cluster_ducks.html
+swots/_bookdown_files
 r_scripts/*.gif
 
