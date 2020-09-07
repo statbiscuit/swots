@@ -9,11 +9,12 @@ knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE, collapse = TRUE, m
 *Use the drop-down menu to explore the collection of duck outfits.*
 
 ```{r bsselectR, echo = FALSE}
+base <- "https://raw.githubusercontent.com/cmjt/statbiscuits/master/swots/images/"
+imgs <- c("blue_flowers-1.jpeg","blue_flowers-2.jpg","blue_flowers-3.jpeg","blue_flowers-4.jpeg","blue_flowers-5.jpeg","bridal-1.jpg","bridal-2.jpeg" ,"bridal-3.jpg","bridal-4.jpg","bridal-5.jpeg","bridal-6.jpg","bridal-7.jpg","patterns-1.jpg","patterns-2.jpg","patterns-3.jpg","patterns-4.jpeg","pink_check-1.jpg","pink_check-2.jpg","pink_check-3.jpeg","pink_check-4.jpeg","red-1.jpeg","red-2.jpeg","red-3.jpeg","red-4.jpeg","red-5.jpg","red-6.jpeg","wax_jacket-1.jpg","wax_jacket-2.jpeg","wax_jacket-3.jpg")
 ## devtools::install_github("walkerke/bsselectR")
 library(bsselectR)
-ducks <- paste0(list.files("images", full.names = TRUE, pattern = "-"))
+ducks <- paste0(base,imgs)
 names(ducks) <- stringr::str_match(ducks,"images/(.*?).jp")[,2]
-
 bsselect(ducks, type = "img", selected = "blue_flowers-2", 
          live_search = FALSE, show_tick = TRUE,
          frame_width = "30%",
@@ -21,7 +22,7 @@ bsselect(ducks, type = "img", selected = "blue_flowers-2",
 ```
 
 
-All images used here are available [here](https://github.com/cmjt/statbiscuits/tree/master/swots/cluster_ducks/images). To read images into R you can use the `readJPEG()` function from the `R` package `jpeg`. Using `readJPEG` each image is read in as a $m*n*3$ array, where each of the three $m*n$ matricies are the red, green, and blue primary values (R, G, & B values) of each pixel respectivly.
+All images used here are available [here](https://github.com/cmjt/statbiscuits/tree/master/swots/images). To read images into R you can use the `readJPEG()` function from the `R` package `jpeg`. Using `readJPEG` each image is read in as a $m*n*3$ array, where each of the three $m*n$ matricies are the red, green, and blue primary values (R, G, & B values) of each pixel respectivly.
 
 
 ```{r read in images, eval = FALSE, echo = FALSE}
