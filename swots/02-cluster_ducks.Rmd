@@ -16,7 +16,7 @@ library(bsselectR)
 ducks <- paste0(base,imgs)
 names(ducks) <- stringr::str_match(ducks,"images/(.*?).jp")[,2]
 bsselect(ducks, type = "img", selected = "blue_flowers-2", 
-         live_search = FALSE, show_tick = TRUE,
+         live_search = TRUE, show_tick = TRUE,
          frame_width = "30%",
          size = 5, height = 50)
 ```
