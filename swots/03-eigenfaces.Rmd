@@ -1,0 +1,264 @@
+# Eigenfaces
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE, messgae = FALSE)
+```
+
+So what is an [Eigenface](https://en.wikipedia.org/wiki/Eigenface)? Let's fine out!
+
+We follow [this blogpost](https://towardsdatascience.com/eigenfaces-recovering-humans-from-ghosts-17606c328184) and recreate the approach in `R`.
+
+First off let's get a sample of the data from the `statbiscuits` repository on GitHub (these data are wrangled versions of those from [`n0acar`'s GitHub repository](https://github.com/n0acar/eigenfaces/tree/master/lfw_cropped_gray_eigenfaces)), see [here](https://github.com/cmjt/statbiscuits/blob/master/swots/raw-scripts/raw_eigenfaces.r for the raw script I used to download and wrangle the data.
+
+```{r get data from GH, eval = FALSE}
+data_url <- "https://github.com/cmjt/statbiscuits/raw/master/swots/data/faces.RData"
+load(url(data_url))
+```
+
+```{r sneak face data, echo = FALSE}
+load("data/faces.RData")
+```
+
+The `faces` object is a `list()` with `r length(faces)` named elements:
+
+```{r data strucure}
+library(pixmap) ## needed to deal with the data
+names(faces)
+```
+
+Each element is a grey pixmap image of the person named. Let's plot the pixmap images
+
+```{r plotfaces, fig.width = 8,fig.height = 8, fig.cap = "Each face in our dataset.", fig.align = "center" }
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(faces)){
+    plot(faces[[i]])
+    legend("bottom", bty = "n", names(faces[i]))
+}
+```
+
+## Prep for PCA
+
+Collapse each image into one column of a matrix.
+
+```{r collapse}
+## collapse the grey matrix
+face_data <- lapply(faces, function(x) c(x@grey))
+## each column is a face
+face_data <- do.call('cbind',face_data)
+colnames(face_data) <- names(faces)
+## have a look at the data matrix
+head(face_data)
+```
+
+### Center around mean
+
+```{r meanface, fig.cap = "The mean face from the 16 in our dataset.", fig.align = "center" ,fig.width = 8, fig.height = 8}
+## center around mean
+mean <- apply(face_data, 1, mean)
+mean_face <- pixmapGrey(mean, 64, 64, bbox = c(0, 0, 64, 64))
+plot(mean_face)
+```
+
+```{r center, fig.width = 8,fig.height = 8, fig.cap = "Each face centered (i.e., with the mean face subtracted).", fig.align = "center" }
+centered <- apply(face_data, 2, function(x) x - mean)
+## centered images
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(faces)){
+    plot(pixmapGrey(centered[,i], 64, 64, bbox = c(0, 0, 64, 64)))
+    legend("bottom", bty = "n", paste(names(faces[i]), "centered", sep = " "))
+}
+```
+
+## Principal Component Analysis (PCA)
+
+```{r pca}
+pca <- prcomp(centered)
+summary(pca)
+
+```
+
+
+The PCA object, `pca`, contains the following information:
+
+  - the center point (`$center`), 
+  - scaling (`$scale`), and
+  - standard deviation (`$sdev`) of each principal component, as well as
+   - the principal components (`$rotation`), and
+   - the values of each sample in terms of the principal components (`$x`)
+
+
+
+```{r biplot, fig.height=8,fig.width=8, fig.align="center"}
+## for a nice biplot
+library(ggfortify)
+library(ggplot2)
+## using autoplot
+## PC1 vs PC2 by default
+autoplot(pca,loadings = TRUE,loadings.label = TRUE,alpha = 0.1)
+## play around with the arguments to see what they control
+autoplot(pca,x = 3, y = 4,loadings = TRUE,loadings.label = TRUE,alpha = 0.1)
+```
+
+### Eigenfaces (Principal Components)
+
+```{r efaces,  fig.width = 8,fig.height = 8, fig.cap = "Each eigenface (PC1 to PC16). Note how noisy the faces get."}
+## eigen faces
+pcs <- pca$x
+eigenfaces <- apply(pcs,2, function(x)  pixmapGrey(x, 64, 64, bbox = c(0, 0, 64, 64)))
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(eigenfaces)){
+    plot(eigenfaces[[i]])
+    legend("bottom", bty = "n", paste("PC", i, sep = " "))
+}
+```
+
+### Reconstructing
+
+#### How many coponents should we keep?
+ 
+Each face is a weighted (loadings) combintation of the eigen faces (PCs) above, but how many PCs (eigenfaces) do we keep?
+ 
+```{r screeplot, fig.align="center"}
+## screeplot
+screeplot(pca,type = "lines", pch = 20)
+```
+
+
+```{r loadings}
+str(pca$rotation)
+```
+
+```{r recon, fig.width = 8,fig.height = 8}
+## 2 PCs
+n_pc <- 2
+
+recon <- pixm <- list()
+for (i in 1:length(faces)){
+    recon[[i]] <- rowSums(pca$x[,1:n_pc]%*%pca$rotation[i,1:n_pc])
+    pixm[[i]] <- pixmapGrey(recon[[i]], 64, 64, bbox = c(0, 0, 64, 64))
+}
+
+## 2PC to reconstruct centered imags
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(pixm)){
+    plot(pixm[[i]])
+    legend("bottom", bty = "n", paste(names(faces[i]), "2 PC", sep = " "))
+}
+
+### Hmm OK, what about 5
+## 5 PCs
+n_pc <- 5
+
+recon <- pixm <- list()
+for (i in 1:length(faces)){
+    recon[[i]] <- rowSums(pca$x[,1:n_pc]%*%pca$rotation[i,1:n_pc])
+    pixm[[i]] <- pixmapGrey(recon[[i]], 64, 64, bbox = c(0, 0, 64, 64))
+}
+
+## 5PC to reconstruct centered images
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(pixm)){
+    plot(pixm[[i]])
+    legend("bottom", bty = "n", paste(names(faces[i]), "5 PC", sep = " "))
+}
+
+```
+
+```{r recon_full,  fig.width = 8,fig.height = 8}
+### Hmm OK, what about 10
+## 10 PCs
+n_pc <- 10
+
+recon <- pixm <- list()
+for (i in 1:length(faces)){
+    recon[[i]] <- rowSums(pca$x[,1:n_pc]%*%pca$rotation[i,1:n_pc])
+    pixm[[i]] <- pixmapGrey(recon[[i]], 64, 64, bbox = c(0, 0, 64, 64))
+}
+## 10PC to reconstruct centered images
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(pixm)){
+    plot(pixm[[i]])
+    legend("bottom", bty = "n", paste(names(faces[i]), "10 PC", sep = " "))
+}
+## remember this is the centered image, let's add the "mean face" to reconstruct the original
+par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
+for(i in 1:length(recon)){
+    plot(pixmapGrey(recon[[i]] + mean, 64, 64, bbox = c(0, 0, 64, 64)))
+    legend("bottom", bty = "n", paste(names(faces[i]), "10 PC + mean", sep = " "))
+}
+```
+
+
+## 1000 faces
+
+Above we use only 16 images, but what if we had many, many, more. Then dimension reduction becomes much more useful. [Here is a zipped archive](http://conradsanderson.id.au/lfwcrop/lfwcrop_grey.zip) of over 13,000 faces as grey pixmap images, as above.
+
+We can download the archive, unzip, and read the files into `R`:
+
+```{r zipped}
+zip <- "http://conradsanderson.id.au/lfwcrop/lfwcrop_grey.zip"
+temp <- tempfile(fileext = ".zip")
+download.file(zip,destfile = temp)
+tst <- unzip(temp)
+unlink(temp)
+all_faces <- list.files("lfwcrop_grey/faces",pattern = ".pgm", full = TRUE)
+## read in a random subset of these images
+## using set.seed to ensure the following is reproducible (means you will get the same subset)
+set.seed(6666)
+choose <- sample(1:length(all_faces), 1000, replace = FALSE)
+face_set <- lapply(choose, function(x) read.pnm(all_faces[x]))
+## name the object accordingly
+col <- sapply(all_faces[choose], function(x) strsplit(strsplit(x,"faces/")[[1]][2],"_")[[1]])
+names <-  sapply(col, function(y) paste(y[-length(y)],  collapse = " ")); names(names) <- NULL
+head(names) ## if you've used the same seed as above this is what you should see
+names(face_set) <- names
+```
+
+Mean face (of the 1000 faces)
+
+```{r collapse and meanface, fig.cap = "The mean face from the 1000 in our dataset. SPOOKY", fig.align = "center", fig.width = 8, fig.height = 8}
+## collapse the grey matrix
+face_data <- lapply(face_set, function(x) c(x@grey))
+## each column is a face
+face_data <- do.call('cbind',face_data)
+colnames(face_data) <- names(face_set)
+## mean face
+mean <- apply(face_data, 1, mean)
+mean_face <- pixmapGrey(mean, 64, 64, bbox = c(0, 0, 64, 64))
+plot(mean_face)
+```
+
+PCA
+
+```{r pca all}
+centered <- apply(face_data, 2, function(x) x - mean)
+pca <- prcomp(centered)
+## screeplot
+screeplot(pca,type = "lines", pch = 20)
+```
+
+What does our first eigen face look like?
+
+```{r eface,  fig.width = 8,fig.height = 8, fig.cap = "First eigenface (PC1)."}
+## eigen faces
+pcs <- pca$x
+eigenfaces <- apply(pcs,2, function(x)  pixmapGrey(x, 64, 64, bbox = c(0, 0, 64, 64)))
+plot(eigenfaces[[1]])
+legend("bottom", bty = "n", "PC 1")
+```
+
+How many PCs would you keep? Let's try 200 (from a possible 1000) and recreate the first face in our dataset.
+
+
+```{r recon_four,  fig.width = 10,fig.height = 5}
+n_pc <- 200
+recon <- rowSums(pca$x[,1:n_pc]%*%pca$rotation[1,1:n_pc])
+## add the "mean face" to reconstruct the original
+par(mfrow = c(1,2), mar = c(0,0,0,0), oma = c(0,0,0,0))
+## original
+plot(face_set[[1]])
+legend("bottom", bty = "n", paste(names(face_set[1]), "original", sep = " "))
+## reconstructed
+plot(pixmapGrey(recon + mean, 64, 64, bbox = c(0, 0, 64, 64)))
+legend("bottom", bty = "n", paste(names(face_set[1]), "reconstructed", sep = " "))
+```
