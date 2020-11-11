@@ -120,7 +120,7 @@ ui <- dashboardPage(
                         column(width = 12,
                                div(
                                    class = "panel-heading",
-                                   h3("R code")
+                                   h3("R code for plot")
                                ),
                                verbatimTextOutput("plotcode")
                                )
@@ -350,11 +350,30 @@ server <- function(input, output,session) {
             }
             plt
         })
-
+    ## print out ggplot code
     output$plotcode <-
-        renderText({
-            "library(palmerpenguins)"
-            "library(ggplot2)"
+        renderPrint({
+            req(x())
+            req(y())
+            data <- penguins[, c(x(), y())]
+            names(data) <- c("x1", "y1")
+            plt_code <- "ggplot(data = penguins, aes(x = x1, y = y1)) +
+                 geom_point()"
+            plt_code <- gsub("x1",x(),plt_code)
+            plt_code <- gsub("y1",y(),plt_code)
+             if(!rlang::is_empty(group())){ 
+                data <- penguins[, c(x(), y(),group())]
+                names(data) <- c("x1", "y1","group")
+                plt_code <- "ggplot(data = dat, aes(x = x1, y1 = y,color = group)) +
+                    geom_point()"
+                plt_code <- gsub("x1",x(),plt_code)
+                plt_code <- gsub("y1",y(),plt_code)
+                plt_code <- gsub("group",group(),plt_code)
+            }
+            cat("library(palmerpenguins) ## for the data",
+                "library(ggplot2) ## for plotting",
+                "## create plot",
+                 paste(plt_code),sep = "\n")
         })
     model <- reactive({
         req(resp())
