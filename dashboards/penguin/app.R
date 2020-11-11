@@ -8,6 +8,7 @@ library(magrittr) ## drag and drop things
 library(ggplot2)
 library(tidyverse) ## plotting and "tidy" manipulation
 library(equatiomatic) ## "text" equation
+library(DT) ## fancy data tables
 
 
 colnames_to_tags <- function(df){
@@ -32,13 +33,22 @@ ui <- dashboardPage(
     ## Sidebar
     dashboardSidebar(
         sidebarMenu(id = "sidebar",
-            menuItem("Plotting", tabName = "plotting", icon = icon("dashboard")),
-            menuItem("Modelling", tabName = "modelling", icon = icon("th"))
-        )
+                    menuItem("Meet the Palmer penguins", tabName = "intro", icon = icon("dashboard")),
+                    menuItem("Plotting", tabName = "plotting", icon = icon("dashboard")),
+                    menuItem("Modelling", tabName = "modelling", icon = icon("th"))
+                    )
     ),
     ## Tab pages
     dashboardBody(
         tabItems(
+            tabItem(tabName = "intro",
+                    h1("Introducing the", tags$a(href = "https://github.com/allisonhorst/palmerpenguins","Palmer penguins")),
+                    tags$img(src = "https://raw.githubusercontent.com/allisonhorst/palmerpenguins/master/man/figures/lter_penguins.png", width = "70%"),
+                    tags$h3("Artwork by",tags$a(href = "https://github.com/allisonhorst/", "@allison_horst")),
+                    DTOutput('palmer_table'),
+                    hr(),
+                    tags$foot("Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. https://allisonhorst.github.io/palmerpenguins/. doi: 10.5281/zenodo.3960218.")
+                    ),
             tabItem(tabName = "plotting",
                     fluidRow(
                         class = "panel panel-heading",
@@ -319,7 +329,9 @@ server <- function(input, output,session) {
     cov2 <- reactive({
         input$sort_xcovariate2
     })
-
+    output$palmer_table = renderDT(
+      penguins, options = list(lengthChange = FALSE)
+    )
     output$plot <-
         renderPlot({
             validate(
