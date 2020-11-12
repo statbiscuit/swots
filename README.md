@@ -5,7 +5,7 @@ This repo contains
  - [`R` scripts](https://github.com/cmjt/statbiscuits/tree/master/r_scripts) to make stats related [.gifs](https://github.com/cmjt/statbiscuits/tree/master/figs_n_gifs)
  - [**s**tatbiscuits **wor**ksheet**s**](https://cmjt.github.io/statbiscuits/) (swots) that go hand in hand with courses I teach ([source code here](https://github.com/cmjt/statbiscuits/tree/master/swots))
  - [source code](https://github.com/cmjt/statbiscuits/tree/master/probable) for a simple RShiny application that allows students to explore the shapes of probability distributions: [probable](https://cmjt.shinyapps.io/probable)
- - [RShiny application introducing linear additive model with the Palmer penguins dataset]( https://cmjt.shinyapps.io/penguin/). Link to the [source code](https://github.com/cmjt/statbiscuits/tree/master/dashboards/penguin) and link to ore info about [the data](https://github.com/allisonhorst/palmerpenguins).
+ - [RShiny application introducing linear additive model with the Palmer penguins dataset]( https://cmjt.shinyapps.io/penguin/). Link to the [source code](https://github.com/cmjt/statbiscuits/tree/master/dashboards/penguin) and link to more info about [the data](https://github.com/allisonhorst/palmerpenguins).
 
 Feel free to fork and modify for your own use or just download the gifs :-)
 
