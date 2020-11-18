@@ -1,6 +1,6 @@
 # Eigenfaces
 
-```{r, setup, include=FALSE}
+```{r, setup_eigen, include=FALSE}
 knitr::opts_chunk$set(cache = TRUE, warning = FALSE, messgae = FALSE)
 ```
 
@@ -8,7 +8,7 @@ So what is an [Eigenface](https://en.wikipedia.org/wiki/Eigenface)? Let's fine o
 
 We follow [this blogpost](https://towardsdatascience.com/eigenfaces-recovering-humans-from-ghosts-17606c328184) and recreate the approach in `R`.
 
-First off let's get a sample of the data from the `statbiscuits` repository on GitHub (these data are wrangled versions of those from [`n0acar`'s GitHub repository](https://github.com/n0acar/eigenfaces/tree/master/lfw_cropped_gray_eigenfaces)), see [here](https://github.com/cmjt/statbiscuits/blob/master/swots/raw-scripts/raw_eigenfaces.r for the raw script I used to download and wrangle the data.
+First off let's get a sample of the data from the `statbiscuits` repository on GitHub (these data are wrangled versions of those from [`n0acar`'s GitHub repository](https://github.com/n0acar/eigenfaces/tree/master/lfw_cropped_gray_eigenfaces)), see [here](https://github.com/cmjt/statbiscuits/blob/master/swots/raw-scripts/raw_eigenfaces.r) for the raw script I used to download and wrangle the data.
 
 ```{r get data from GH, eval = FALSE}
 data_url <- "https://github.com/cmjt/statbiscuits/raw/master/swots/data/faces.RData"
@@ -52,14 +52,14 @@ head(face_data)
 
 ### Center around mean
 
-```{r meanface, fig.cap = "The mean face from the 16 in our dataset.", fig.align = "center" ,fig.width = 8, fig.height = 8}
+```{r meanface, fig.cap = "The 'mean' face from the 16 in our dataset.", fig.align = "center" ,fig.width = 8, fig.height = 8}
 ## center around mean
 mean <- apply(face_data, 1, mean)
 mean_face <- pixmapGrey(mean, 64, 64, bbox = c(0, 0, 64, 64))
 plot(mean_face)
 ```
 
-```{r center, fig.width = 8,fig.height = 8, fig.cap = "Each face centered (i.e., with the mean face subtracted).", fig.align = "center" }
+```{r center, fig.width = 8,fig.height = 8, fig.cap = "Each face centered (i.e., with the mean face subtracted).", fig.align = "center", warning=FALSE}
 centered <- apply(face_data, 2, function(x) x - mean)
 ## centered images
 par(mfrow = c(4,4), mar = c(0,0,0,0), oma = c(0,0,0,0))
@@ -88,7 +88,7 @@ The PCA object, `pca`, contains the following information:
 
 
 
-```{r biplot, fig.height=8,fig.width=8, fig.align="center"}
+```{r biplot, fig.height=8,fig.width=8, fig.align="center", warning=FALSE}
 ## for a nice biplot
 library(ggfortify)
 library(ggplot2)
@@ -101,7 +101,7 @@ autoplot(pca,x = 3, y = 4,loadings = TRUE,loadings.label = TRUE,alpha = 0.1)
 
 ### Eigenfaces (Principal Components)
 
-```{r efaces,  fig.width = 8,fig.height = 8, fig.cap = "Each eigenface (PC1 to PC16). Note how noisy the faces get."}
+```{r efaces,  fig.width = 8,fig.height = 8, fig.cap = "Each eigenface (PC1 to PC16). Note how noisy the faces get.", warning=FALSE}
 ## eigen faces
 pcs <- pca$x
 eigenfaces <- apply(pcs,2, function(x)  pixmapGrey(x, 64, 64, bbox = c(0, 0, 64, 64)))
@@ -128,7 +128,7 @@ screeplot(pca,type = "lines", pch = 20)
 str(pca$rotation)
 ```
 
-```{r recon, fig.width = 8,fig.height = 8}
+```{r recon, fig.width = 8,fig.height = 8, warning=FALSE}
 ## 2 PCs
 n_pc <- 2
 
@@ -164,7 +164,7 @@ for(i in 1:length(pixm)){
 
 ```
 
-```{r recon_full,  fig.width = 8,fig.height = 8}
+```{r recon_full,  fig.width = 8,fig.height = 8, warning=FALSE}
 ### Hmm OK, what about 10
 ## 10 PCs
 n_pc <- 10
@@ -195,7 +195,7 @@ Above we use only 16 images, but what if we had many, many, more. Then dimension
 
 We can download the archive, unzip, and read the files into `R`:
 
-```{r zipped}
+```{r zipped, warning=FALSE}
 zip <- "http://conradsanderson.id.au/lfwcrop/lfwcrop_grey.zip"
 temp <- tempfile(fileext = ".zip")
 download.file(zip,destfile = temp)
@@ -216,7 +216,7 @@ names(face_set) <- names
 
 Mean face (of the 1000 faces)
 
-```{r collapse and meanface, fig.cap = "The mean face from the 1000 in our dataset. SPOOKY", fig.align = "center", fig.width = 8, fig.height = 8}
+```{r collapse and meanface, fig.cap = "The 'mean' face from the 1000 in our dataset. SPOOKY", fig.align = "center", fig.width = 8, fig.height = 8, warning=FALSE}
 ## collapse the grey matrix
 face_data <- lapply(face_set, function(x) c(x@grey))
 ## each column is a face
@@ -230,7 +230,7 @@ plot(mean_face)
 
 PCA
 
-```{r pca all}
+```{r pca all, warning=FALSE}
 centered <- apply(face_data, 2, function(x) x - mean)
 pca <- prcomp(centered)
 ## screeplot
@@ -239,7 +239,7 @@ screeplot(pca,type = "lines", pch = 20)
 
 What does our first eigen face look like?
 
-```{r eface,  fig.width = 8,fig.height = 8, fig.cap = "First eigenface (PC1)."}
+```{r eface,  fig.width = 8,fig.height = 8, fig.cap = "First eigenface (PC1).", warning=FALSE}
 ## eigen faces
 pcs <- pca$x
 eigenfaces <- apply(pcs,2, function(x)  pixmapGrey(x, 64, 64, bbox = c(0, 0, 64, 64)))
@@ -250,7 +250,7 @@ legend("bottom", bty = "n", "PC 1")
 How many PCs would you keep? Let's try 200 (from a possible 1000) and recreate the first face in our dataset.
 
 
-```{r recon_four,  fig.width = 10,fig.height = 5}
+```{r recon_four,  fig.width = 10,fig.height = 5, warning=FALSE}
 n_pc <- 200
 recon <- rowSums(pca$x[,1:n_pc]%*%pca$rotation[1,1:n_pc])
 ## add the "mean face" to reconstruct the original
