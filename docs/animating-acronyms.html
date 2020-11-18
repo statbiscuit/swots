@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1 Animating Acronyms | Worksheets</title>
-  <meta name="description" content="1 Animating Acronyms | Worksheets based on some elements of the courses I teach" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <title>1 Animating Acronyms | Collection of #rstats and #biostats worksheets</title>
+  <meta name="description" content="1 Animating Acronyms | Collection of #rstats and #biostats worksheets" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1 Animating Acronyms | Worksheets" />
+  <meta property="og:title" content="1 Animating Acronyms | Collection of #rstats and #biostats worksheets" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="1 Animating Acronyms | Worksheets based on some elements of the courses I teach" />
+  
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1 Animating Acronyms | Worksheets" />
+  <meta name="twitter:title" content="1 Animating Acronyms | Collection of #rstats and #biostats worksheets" />
   
-  <meta name="twitter:description" content="1 Animating Acronyms | Worksheets based on some elements of the courses I teach" />
+  
   
 
-<meta name="author" content="statbiscuits" />
+<meta name="author" content="written by statbiscuits" />
 
 
 
@@ -49,6 +49,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -124,9 +126,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="2" data-path="clusterducks.html"><a href="clusterducks.html"><i class="fa fa-check"></i><b>2</b> ClusterDucks</a><ul>
 <li class="chapter" data-level="2.1" data-path="clusterducks.html"><a href="clusterducks.html#rgb-data"><i class="fa fa-check"></i><b>2.1</b> RGB data</a></li>
-<li class="chapter" data-level="2.2" data-path="clusterducks.html"><a href="clusterducks.html#k-means-clustering"><i class="fa fa-check"></i><b>2.2</b> K means clustering</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="clusterducks.html"><a href="clusterducks.html#how-many-clusters-are-best"><i class="fa fa-check"></i><b>2.2.1</b> How many clusters are best?</a></li>
+<li class="chapter" data-level="2.2" data-path="clusterducks.html"><a href="clusterducks.html#k-means-clustering"><i class="fa fa-check"></i><b>2.2</b> K means clustering</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="eigenfaces.html"><a href="eigenfaces.html"><i class="fa fa-check"></i><b>3</b> Eigenfaces</a><ul>
+<li class="chapter" data-level="3.1" data-path="eigenfaces.html"><a href="eigenfaces.html#prep-for-pca"><i class="fa fa-check"></i><b>3.1</b> Prep for PCA</a></li>
+<li class="chapter" data-level="3.2" data-path="eigenfaces.html"><a href="eigenfaces.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>3.2</b> Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="3.3" data-path="eigenfaces.html"><a href="eigenfaces.html#faces"><i class="fa fa-check"></i><b>3.3</b> 1000 faces</a></li>
 </ul></li>
 </ul>
 
@@ -137,7 +142,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Worksheets</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Collection of #rstats and #biostats worksheets</a>
           </h1>
         </div>
 
@@ -195,16 +200,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="format-the-data-to-suit-our-porposes" class="section level2">
 <h2><span class="header-section-number">1.2</span> Format the data to suit our porposes</h2>
 <p>A long list probably isn't the best way to summarise these data - We could combine all the elements into one big <code>dataframe</code> (remember we have already have a column specifying year)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(top_twenty)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(top_twenty)
 <span class="kw">head</span>(df)</code></pre></div>
 <pre><code>##      pmid acronyms nchar source Journal.Title      ISSN     eISSN Year Volume
 ## 1 1688383      RNA     3  Title       J Virol 0022-538X 1098-5514 1990     64

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Eigenfaces | Collection of #rstats and #biostats worksheets</title>
+  <meta name="description" content="3 Eigenfaces | Collection of #rstats and #biostats worksheets" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Eigenfaces | Collection of #rstats and #biostats worksheets" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Eigenfaces | Collection of #rstats and #biostats worksheets" />
+  
+  
+  
+
+<meta name="author" content="written by statbiscuits" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="clusterducks.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/bootstrap-select-1.12.1/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-select-1.12.1/dist/js/bootstrap-select.min.js"></script>
+<script src="libs/bsselect-binding-0.1.0/bsselect.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="animating-acronyms.html"><a href="animating-acronyms.html"><i class="fa fa-check"></i><b>1</b> Animating Acronyms</a><ul>
+<li class="chapter" data-level="1.1" data-path="animating-acronyms.html"><a href="animating-acronyms.html#data-exploration"><i class="fa fa-check"></i><b>1.1</b> Data exploration</a></li>
+<li class="chapter" data-level="1.2" data-path="animating-acronyms.html"><a href="animating-acronyms.html#format-the-data-to-suit-our-porposes"><i class="fa fa-check"></i><b>1.2</b> Format the data to suit our porposes</a></li>
+<li class="chapter" data-level="1.3" data-path="animating-acronyms.html"><a href="animating-acronyms.html#plotting"><i class="fa fa-check"></i><b>1.3</b> Plotting</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="clusterducks.html"><a href="clusterducks.html"><i class="fa fa-check"></i><b>2</b> ClusterDucks</a><ul>
+<li class="chapter" data-level="2.1" data-path="clusterducks.html"><a href="clusterducks.html#rgb-data"><i class="fa fa-check"></i><b>2.1</b> RGB data</a></li>
+<li class="chapter" data-level="2.2" data-path="clusterducks.html"><a href="clusterducks.html#k-means-clustering"><i class="fa fa-check"></i><b>2.2</b> K means clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="eigenfaces.html"><a href="eigenfaces.html"><i class="fa fa-check"></i><b>3</b> Eigenfaces</a><ul>
+<li class="chapter" data-level="3.1" data-path="eigenfaces.html"><a href="eigenfaces.html#prep-for-pca"><i class="fa fa-check"></i><b>3.1</b> Prep for PCA</a></li>
+<li class="chapter" data-level="3.2" data-path="eigenfaces.html"><a href="eigenfaces.html#principal-component-analysis-pca"><i class="fa fa-check"></i><b>3.2</b> Principal Component Analysis (PCA)</a></li>
+<li class="chapter" data-level="3.3" data-path="eigenfaces.html"><a href="eigenfaces.html#faces"><i class="fa fa-check"></i><b>3.3</b> 1000 faces</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Collection of #rstats and #biostats worksheets</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="eigenfaces" class="section level1">
+<h1><span class="header-section-number">3</span> Eigenfaces</h1>
+<p>So what is an <a href="https://en.wikipedia.org/wiki/Eigenface">Eigenface</a>? Let's fine out!</p>
+<p>We follow <a href="https://towardsdatascience.com/eigenfaces-recovering-humans-from-ghosts-17606c328184">this blogpost</a> and recreate the approach in <code>R</code>.</p>
+<p>First off let's get a sample of the data from the <code>statbiscuits</code> repository on GitHub (these data are wrangled versions of those from <a href="https://github.com/n0acar/eigenfaces/tree/master/lfw_cropped_gray_eigenfaces"><code>n0acar</code>'s GitHub repository</a>), see <a href="https://github.com/cmjt/statbiscuits/blob/master/swots/raw-scripts/raw_eigenfaces.r">here</a> for the raw script I used to download and wrangle the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_url &lt;-<span class="st"> &quot;https://github.com/cmjt/statbiscuits/raw/master/swots/data/faces.RData&quot;</span>
+<span class="kw">load</span>(<span class="kw">url</span>(data_url))</code></pre></div>
+<p>The <code>faces</code> object is a <code>list()</code> with 16 named elements:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pixmap) ## needed to deal with the data
+<span class="kw">names</span>(faces)
+##  [1] &quot;Angelina Jolie&quot;        &quot;Arnold Schwarzenegger&quot; &quot;Azra Akin&quot;            
+##  [4] &quot;Bill Gates&quot;            &quot;Daniel Radcliffe&quot;      &quot;David Beckham&quot;        
+##  [7] &quot;Dwayne Johnson&quot;        &quot;George W Bush&quot;         &quot;Gwyneth Paltrow&quot;      
+## [10] &quot;Hillary Clinton&quot;       &quot;LeBron James&quot;          &quot;Marilyn Monroe&quot;       
+## [13] &quot;Michael Jackson&quot;       &quot;Michael Jordan&quot;        &quot;Oprah Winfrey&quot;        
+## [16] &quot;Queen Elizabeth II&quot;</code></pre></div>
+<p>Each element is a grey pixmap image of the person named. Let's plot the pixmap images</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(faces)){
+    <span class="kw">plot</span>(faces[[i]])
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">names</span>(faces[i]))
+}</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:plotfaces"></span>
+<img src="_main_files/figure-html/plotfaces-1.png" alt="Each face in our dataset." width="768" />
+<p class="caption">
+Figure 3.1: Each face in our dataset.
+</p>
+</div>
+<div id="prep-for-pca" class="section level2">
+<h2><span class="header-section-number">3.1</span> Prep for PCA</h2>
+<p>Collapse each image into one column of a matrix.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## collapse the grey matrix
+face_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(faces, <span class="cf">function</span>(x) <span class="kw">c</span>(x<span class="op">@</span>grey))
+## each column is a face
+face_data &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&#39;cbind&#39;</span>,face_data)
+<span class="kw">colnames</span>(face_data) &lt;-<span class="st"> </span><span class="kw">names</span>(faces)
+## have a look at the data matrix
+<span class="kw">head</span>(face_data)
+##      Angelina Jolie Arnold Schwarzenegger Azra Akin Bill Gates Daniel Radcliffe
+## [1,]      0.3921569             0.4274510 0.3019608  0.8235294        0.2000000
+## [2,]      0.3960784             0.4274510 0.2901961  0.8313725        0.2392157
+## [3,]      0.4039216             0.4235294 0.2862745  0.8313725        0.2745098
+## [4,]      0.4039216             0.4274510 0.2745098  0.8313725        0.3058824
+## [5,]      0.4235294             0.4352941 0.2745098  0.8235294        0.3176471
+## [6,]      0.4392157             0.4431373 0.2666667  0.8274510        0.3254902
+##      David Beckham Dwayne Johnson George W Bush Gwyneth Paltrow Hillary Clinton
+## [1,]     0.3058824      0.2235294     0.5529412       0.7411765       0.2705882
+## [2,]     0.3333333      0.2313725     0.5607843       0.7843137       0.3176471
+## [3,]     0.3921569      0.2274510     0.5490196       0.8117647       0.3686275
+## [4,]     0.4470588      0.2078431     0.5686275       0.8313725       0.4745098
+## [5,]     0.4862745      0.2039216     0.5803922       0.8313725       0.5686275
+## [6,]     0.5254902      0.1960784     0.5450980       0.8352941       0.6470588
+##      LeBron James Marilyn Monroe Michael Jackson Michael Jordan Oprah Winfrey
+## [1,]    0.5333333     0.08627451       0.1529412      0.3372549     0.1372549
+## [2,]    0.5254902     0.11764706       0.1647059      0.3411765     0.1607843
+## [3,]    0.5333333     0.16470588       0.2078431      0.3411765     0.1686275
+## [4,]    0.5215686     0.17647059       0.2549020      0.3450980     0.1764706
+## [5,]    0.5294118     0.14117647       0.3176471      0.3411765     0.1647059
+## [6,]    0.5490196     0.13333333       0.4039216      0.3137255     0.1960784
+##      Queen Elizabeth II
+## [1,]          0.1725490
+## [2,]          0.1921569
+## [3,]          0.2078431
+## [4,]          0.2470588
+## [5,]          0.2784314
+## [6,]          0.3254902</code></pre></div>
+<div id="center-around-mean" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Center around mean</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## center around mean
+mean &lt;-<span class="st"> </span><span class="kw">apply</span>(face_data, <span class="dv">1</span>, mean)
+mean_face &lt;-<span class="st"> </span><span class="kw">pixmapGrey</span>(mean, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+<span class="kw">plot</span>(mean_face)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:meanface"></span>
+<img src="_main_files/figure-html/meanface-1.png" alt="The 'mean' face from the 16 in our dataset." width="768" />
+<p class="caption">
+Figure 3.2: The 'mean' face from the 16 in our dataset.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">centered &lt;-<span class="st"> </span><span class="kw">apply</span>(face_data, <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span>mean)
+## centered images
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(faces)){
+    <span class="kw">plot</span>(<span class="kw">pixmapGrey</span>(centered[,i], <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>)))
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(faces[i]), <span class="st">&quot;centered&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:center"></span>
+<img src="_main_files/figure-html/center-1.png" alt="Each face centered (i.e., with the mean face subtracted)." width="768" />
+<p class="caption">
+Figure 3.3: Each face centered (i.e., with the mean face subtracted).
+</p>
+</div>
+</div>
+</div>
+<div id="principal-component-analysis-pca" class="section level2">
+<h2><span class="header-section-number">3.2</span> Principal Component Analysis (PCA)</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(centered)
+<span class="kw">summary</span>(pca)
+## Importance of components:
+##                           PC1    PC2     PC3    PC4     PC5     PC6     PC7
+## Standard deviation     0.2824 0.2135 0.15918 0.1511 0.13552 0.12660 0.11789
+## Proportion of Variance 0.2811 0.1605 0.08928 0.0805 0.06471 0.05647 0.04897
+## Cumulative Proportion  0.2811 0.4416 0.53088 0.6114 0.67609 0.73256 0.78153
+##                            PC8     PC9    PC10    PC11    PC12    PC13    PC14
+## Standard deviation     0.11556 0.10636 0.09315 0.09213 0.08201 0.07425 0.06766
+## Proportion of Variance 0.04705 0.03986 0.03057 0.02990 0.02370 0.01943 0.01613
+## Cumulative Proportion  0.82858 0.86843 0.89901 0.92891 0.95261 0.97204 0.98817
+##                           PC15      PC16
+## Standard deviation     0.05796 2.689e-16
+## Proportion of Variance 0.01183 0.000e+00
+## Cumulative Proportion  1.00000 1.000e+00</code></pre></div>
+<p>The PCA object, <code>pca</code>, contains the following information:</p>
+<ul>
+<li>the center point (<code>$center</code>),</li>
+<li>scaling (<code>$scale</code>), and</li>
+<li>standard deviation (<code>$sdev</code>) of each principal component, as well as</li>
+<li>the principal components (<code>$rotation</code>), and</li>
+<li>the values of each sample in terms of the principal components (<code>$x</code>)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## for a nice biplot
+<span class="kw">library</span>(ggfortify)
+<span class="kw">library</span>(ggplot2)
+## using autoplot
+## PC1 vs PC2 by default
+<span class="kw">autoplot</span>(pca,<span class="dt">loadings =</span> <span class="ot">TRUE</span>,<span class="dt">loadings.label =</span> <span class="ot">TRUE</span>,<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/biplot-1.png" width="768" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## play around with the arguments to see what they control
+<span class="kw">autoplot</span>(pca,<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">4</span>,<span class="dt">loadings =</span> <span class="ot">TRUE</span>,<span class="dt">loadings.label =</span> <span class="ot">TRUE</span>,<span class="dt">alpha =</span> <span class="fl">0.1</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/biplot-2.png" width="768" style="display: block; margin: auto;" /></p>
+<div id="eigenfaces-principal-components" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Eigenfaces (Principal Components)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## eigen faces
+pcs &lt;-<span class="st"> </span>pca<span class="op">$</span>x
+eigenfaces &lt;-<span class="st"> </span><span class="kw">apply</span>(pcs,<span class="dv">2</span>, <span class="cf">function</span>(x)  <span class="kw">pixmapGrey</span>(x, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>)))
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(eigenfaces)){
+    <span class="kw">plot</span>(eigenfaces[[i]])
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="st">&quot;PC&quot;</span>, i, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<div class="figure"><span id="fig:efaces"></span>
+<img src="_main_files/figure-html/efaces-1.png" alt="Each eigenface (PC1 to PC16). Note how noisy the faces get." width="768" />
+<p class="caption">
+Figure 3.4: Each eigenface (PC1 to PC16). Note how noisy the faces get.
+</p>
+</div>
+</div>
+<div id="reconstructing" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Reconstructing</h3>
+<div id="how-many-coponents-should-we-keep" class="section level4">
+<h4><span class="header-section-number">3.2.2.1</span> How many coponents should we keep?</h4>
+<p>Each face is a weighted (loadings) combintation of the eigen faces (PCs) above, but how many PCs (eigenfaces) do we keep?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## screeplot
+<span class="kw">screeplot</span>(pca,<span class="dt">type =</span> <span class="st">&quot;lines&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/screeplot-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(pca<span class="op">$</span>rotation)
+##  num [1:16, 1:16] 0.0668 -0.0609 -0.1394 0.2008 0.3148 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:16] &quot;Angelina Jolie&quot; &quot;Arnold Schwarzenegger&quot; &quot;Azra Akin&quot; &quot;Bill Gates&quot; ...
+##   ..$ : chr [1:16] &quot;PC1&quot; &quot;PC2&quot; &quot;PC3&quot; &quot;PC4&quot; ...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## 2 PCs
+n_pc &lt;-<span class="st"> </span><span class="dv">2</span>
+
+recon &lt;-<span class="st"> </span>pixm &lt;-<span class="st"> </span><span class="kw">list</span>()
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(faces)){
+    recon[[i]] &lt;-<span class="st"> </span><span class="kw">rowSums</span>(pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span>n_pc]<span class="op">%*%</span>pca<span class="op">$</span>rotation[i,<span class="dv">1</span><span class="op">:</span>n_pc])
+    pixm[[i]] &lt;-<span class="st"> </span><span class="kw">pixmapGrey</span>(recon[[i]], <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+}
+
+## 2PC to reconstruct centered imags
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pixm)){
+    <span class="kw">plot</span>(pixm[[i]])
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(faces[i]), <span class="st">&quot;2 PC&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<p><img src="_main_files/figure-html/recon-1.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+### Hmm OK, what about 5
+## 5 PCs
+n_pc &lt;-<span class="st"> </span><span class="dv">5</span>
+
+recon &lt;-<span class="st"> </span>pixm &lt;-<span class="st"> </span><span class="kw">list</span>()
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(faces)){
+    recon[[i]] &lt;-<span class="st"> </span><span class="kw">rowSums</span>(pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span>n_pc]<span class="op">%*%</span>pca<span class="op">$</span>rotation[i,<span class="dv">1</span><span class="op">:</span>n_pc])
+    pixm[[i]] &lt;-<span class="st"> </span><span class="kw">pixmapGrey</span>(recon[[i]], <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+}
+
+## 5PC to reconstruct centered images
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pixm)){
+    <span class="kw">plot</span>(pixm[[i]])
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(faces[i]), <span class="st">&quot;5 PC&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<p><img src="_main_files/figure-html/recon-2.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### Hmm OK, what about 10
+## 10 PCs
+n_pc &lt;-<span class="st"> </span><span class="dv">10</span>
+
+recon &lt;-<span class="st"> </span>pixm &lt;-<span class="st"> </span><span class="kw">list</span>()
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(faces)){
+    recon[[i]] &lt;-<span class="st"> </span><span class="kw">rowSums</span>(pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span>n_pc]<span class="op">%*%</span>pca<span class="op">$</span>rotation[i,<span class="dv">1</span><span class="op">:</span>n_pc])
+    pixm[[i]] &lt;-<span class="st"> </span><span class="kw">pixmapGrey</span>(recon[[i]], <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+}
+## 10PC to reconstruct centered images
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pixm)){
+    <span class="kw">plot</span>(pixm[[i]])
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(faces[i]), <span class="st">&quot;10 PC&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<p><img src="_main_files/figure-html/recon_full-1.png" width="768" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## remember this is the centered image, let&#39;s add the &quot;mean face&quot; to reconstruct the original
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">4</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(recon)){
+    <span class="kw">plot</span>(<span class="kw">pixmapGrey</span>(recon[[i]] <span class="op">+</span><span class="st"> </span>mean, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>)))
+    <span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(faces[i]), <span class="st">&quot;10 PC + mean&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+}</code></pre></div>
+<p><img src="_main_files/figure-html/recon_full-2.png" width="768" /></p>
+</div>
+</div>
+</div>
+<div id="faces" class="section level2">
+<h2><span class="header-section-number">3.3</span> 1000 faces</h2>
+<p>Above we use only 16 images, but what if we had many, many, more. Then dimension reduction becomes much more useful. <a href="http://conradsanderson.id.au/lfwcrop/lfwcrop_grey.zip">Here is a zipped archive</a> of over 13,000 faces as grey pixmap images, as above.</p>
+<p>We can download the archive, unzip, and read the files into <code>R</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zip &lt;-<span class="st"> &quot;http://conradsanderson.id.au/lfwcrop/lfwcrop_grey.zip&quot;</span>
+temp &lt;-<span class="st"> </span><span class="kw">tempfile</span>(<span class="dt">fileext =</span> <span class="st">&quot;.zip&quot;</span>)
+<span class="kw">download.file</span>(zip,<span class="dt">destfile =</span> temp)
+tst &lt;-<span class="st"> </span><span class="kw">unzip</span>(temp)
+<span class="kw">unlink</span>(temp)
+all_faces &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;lfwcrop_grey/faces&quot;</span>,<span class="dt">pattern =</span> <span class="st">&quot;.pgm&quot;</span>, <span class="dt">full =</span> <span class="ot">TRUE</span>)
+## read in a random subset of these images
+## using set.seed to ensure the following is reproducible (means you will get the same subset)
+<span class="kw">set.seed</span>(<span class="dv">6666</span>)
+choose &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(all_faces), <span class="dv">1000</span>, <span class="dt">replace =</span> <span class="ot">FALSE</span>)
+face_set &lt;-<span class="st"> </span><span class="kw">lapply</span>(choose, <span class="cf">function</span>(x) <span class="kw">read.pnm</span>(all_faces[x]))
+## name the object accordingly
+col &lt;-<span class="st"> </span><span class="kw">sapply</span>(all_faces[choose], <span class="cf">function</span>(x) <span class="kw">strsplit</span>(<span class="kw">strsplit</span>(x,<span class="st">&quot;faces/&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">2</span>],<span class="st">&quot;_&quot;</span>)[[<span class="dv">1</span>]])
+names &lt;-<span class="st">  </span><span class="kw">sapply</span>(col, <span class="cf">function</span>(y) <span class="kw">paste</span>(y[<span class="op">-</span><span class="kw">length</span>(y)],  <span class="dt">collapse =</span> <span class="st">&quot; &quot;</span>)); <span class="kw">names</span>(names) &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">head</span>(names) ## if you&#39;ve used the same seed as above this is what you should see
+## [1] &quot;Susilo Bambang Yudhoyono&quot; &quot;Brandon Larson&quot;          
+## [3] &quot;Kurt Warner&quot;              &quot;Toshihiko Fukui&quot;         
+## [5] &quot;Clemente de la Vega&quot;      &quot;Harvey Fierstein&quot;
+<span class="kw">names</span>(face_set) &lt;-<span class="st"> </span>names</code></pre></div>
+<p>Mean face (of the 1000 faces)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## collapse the grey matrix
+face_data &lt;-<span class="st"> </span><span class="kw">lapply</span>(face_set, <span class="cf">function</span>(x) <span class="kw">c</span>(x<span class="op">@</span>grey))
+## each column is a face
+face_data &lt;-<span class="st"> </span><span class="kw">do.call</span>(<span class="st">&#39;cbind&#39;</span>,face_data)
+<span class="kw">colnames</span>(face_data) &lt;-<span class="st"> </span><span class="kw">names</span>(face_set)
+## mean face
+mean &lt;-<span class="st"> </span><span class="kw">apply</span>(face_data, <span class="dv">1</span>, mean)
+mean_face &lt;-<span class="st"> </span><span class="kw">pixmapGrey</span>(mean, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>))
+<span class="kw">plot</span>(mean_face)</code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="_main_files/figure-html/collapse%20and%20meanface-1.png" alt="The 'mean' face from the 1000 in our dataset. SPOOKY" width="768" />
+<p class="caption">
+(#fig:collapse and meanface)The 'mean' face from the 1000 in our dataset. SPOOKY
+</p>
+</div>
+<p>PCA</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">centered &lt;-<span class="st"> </span><span class="kw">apply</span>(face_data, <span class="dv">2</span>, <span class="cf">function</span>(x) x <span class="op">-</span><span class="st"> </span>mean)
+pca &lt;-<span class="st"> </span><span class="kw">prcomp</span>(centered)
+## screeplot
+<span class="kw">screeplot</span>(pca,<span class="dt">type =</span> <span class="st">&quot;lines&quot;</span>, <span class="dt">pch =</span> <span class="dv">20</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/pca%20all-1.png" width="672" /></p>
+<p>What does our first eigen face look like?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## eigen faces
+pcs &lt;-<span class="st"> </span>pca<span class="op">$</span>x
+eigenfaces &lt;-<span class="st"> </span><span class="kw">apply</span>(pcs,<span class="dv">2</span>, <span class="cf">function</span>(x)  <span class="kw">pixmapGrey</span>(x, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>)))
+<span class="kw">plot</span>(eigenfaces[[<span class="dv">1</span>]])
+<span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="st">&quot;PC 1&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:eface"></span>
+<img src="_main_files/figure-html/eface-1.png" alt="First eigenface (PC1)." width="768" />
+<p class="caption">
+Figure 3.5: First eigenface (PC1).
+</p>
+</div>
+<p>How many PCs would you keep? Let's try 200 (from a possible 1000) and recreate the first face in our dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_pc &lt;-<span class="st"> </span><span class="dv">200</span>
+recon &lt;-<span class="st"> </span><span class="kw">rowSums</span>(pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span>n_pc]<span class="op">%*%</span>pca<span class="op">$</span>rotation[<span class="dv">1</span>,<span class="dv">1</span><span class="op">:</span>n_pc])
+## add the &quot;mean face&quot; to reconstruct the original
+<span class="kw">par</span>(<span class="dt">mfrow =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>))
+## original
+<span class="kw">plot</span>(face_set[[<span class="dv">1</span>]])
+<span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(face_set[<span class="dv">1</span>]), <span class="st">&quot;original&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))
+## reconstructed
+<span class="kw">plot</span>(<span class="kw">pixmapGrey</span>(recon <span class="op">+</span><span class="st"> </span>mean, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dt">bbox =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">64</span>, <span class="dv">64</span>)))
+<span class="kw">legend</span>(<span class="st">&quot;bottom&quot;</span>, <span class="dt">bty =</span> <span class="st">&quot;n&quot;</span>, <span class="kw">paste</span>(<span class="kw">names</span>(face_set[<span class="dv">1</span>]), <span class="st">&quot;reconstructed&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot; &quot;</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/recon_four-1.png" width="960" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="clusterducks.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
