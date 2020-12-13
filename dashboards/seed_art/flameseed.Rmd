@@ -1,0 +1,27 @@
+---
+title: "Grow your own flametree"
+output: learnr::tutorial
+runtime: shiny_prerendered
+---
+
+```{r setup, include = FALSE}
+library(learnr)
+```
+
+The two exercises below use the [flametree](https://github.com/djnavarro/flametree) [aRt](https://github.com/djnavarro) package written by by [Danielle Navarro](https://djnavarro.net/).
+
+Try changing the `seed` argument to grow your own unique flametree.
+
+```{r flameseed, exercise = TRUE, eval = TRUE}
+library(flametree)
+flametree <- flametree_grow(seed = 2020)
+flametree_plot(tree = flametree)  
+```
+
+Try changing some of the other arguments too; see if you can work out what they do!
+
+```{r flame, exercise = TRUE, eval = TRUE}
+library(flametree)
+flametree <- flametree_grow(seed = 2020, time = 3, split = 5) 
+flametree_plot(tree = flametree)  
+```

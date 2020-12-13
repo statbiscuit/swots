@@ -1,0 +1,94 @@
+# `seed` aRt
+
+```{r, setupaRt, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+## What is a seed?
+
+*"A random seed (or seed state, or just seed) is a number used to initialize a pseudorandom number generator."*
+
+![](http://etoan.com/random-number-generation/dilbert2001182781025.gif)
+
+### [flametree](https://github.com/djnavarro/flametree)
+
+Inspired by [Danielle Navarro](https://djnavarro.net/)'s [aRt](https://github.com/djnavarro) packages we illustrate, using art, what setting a random `seed` does.
+
+```{r flametree,echo = TRUE}
+## use
+## devtools::install_github("djnavarro/flametree")
+## to install
+library(flametree)
+```
+
+
+To *grow* the *flametree* we use the `flametree_grow()` function which has an argument `seed`. Using this we can grow any number of unique *flametrees*!
+
+
+```{r flam1,echo = TRUE}
+## R release date = 29 February 2000
+## so set seed = 20000229
+flametree <- flametree_grow(seed = 20000229) 
+flametree_plot(tree = flametree)  
+```
+
+```{r flam2,echo = TRUE}
+## The year of lockdowns 2020
+flametree <- flametree_grow(seed = 2020) 
+flametree_plot(tree = flametree)  
+```
+
+#### [Grow your own tree](https://cmjt.shinyapps.io/flameseed/)
+
+
+```{r iframe, eval = TRUE, echo = FALSE}
+knitr::include_url("https://cmjt.shinyapps.io/flameseed/", height = "500px")
+```
+
+### Thorns
+
+
+What about [thorn02](https://github.com/djnavarro/thorn02)? 
+
+
+```{r get code, eval = FALSE}
+## required packages
+pkgs <- c("Rcpp","ggplot2","ggforce","voronise","dplyr","here")
+for(i in 1:length(pkgs)) if(!require(pkgs[i])) install.packages(pkgs[i])
+## This isn't a package so we source the code files from GitHub
+## and create the directory structure the function expects
+## .cpp file needed
+dir.create("../source")
+dir.create("../image")
+download.file("https://raw.githubusercontent.com/djnavarro/thorn02/master/source/thorn_02.cpp",destfile = "../source/thorn_02.cpp")
+devtools::source_url("https://raw.githubusercontent.com/djnavarro/thorn02/master/source/thorn_02.R")
+```
+
+The `thorn02()` function we've just sourced has one argument: `seed`. 
+
+```{r first, echo = TRUE, eval = FALSE}
+## using the worst password in the world
+thorn02(seed = 1234)
+```
+
+![](../image/thorn_02_1234.png)
+
+
+```{r second, echo = TRUE, eval = FALSE}
+## glasses of wine I had last night
+thorn02(seed = 3)
+```
+
+
+![](../image/thorn_02_3.png)
+
+
+```{r third, echo = TRUE, eval = FALSE}
+## R release date = 29 February 2000
+## so set seed = 20000229
+thorn02(seed = 20000229)
+```
+
+
+
+![](../image/thorn_02_20000229.png)

@@ -23,3 +23,8 @@ eigenfaces-principal-components
 reconstructing
 how-many-coponents-should-we-keep
 faces
+seed-art
+what-is-a-seed
+flametree
+grow-your-own-tree
+thorns

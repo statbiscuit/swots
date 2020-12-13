@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Collection of #rstats and #biostats worksheets</title>
-  <meta name="description" content="Collection of #rstats and #biostats worksheets" />
+  <title>4 seed aRt | Collection of #rstats and #biostats worksheets</title>
+  <meta name="description" content="4 seed aRt | Collection of #rstats and #biostats worksheets" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Collection of #rstats and #biostats worksheets" />
+  <meta property="og:title" content="4 seed aRt | Collection of #rstats and #biostats worksheets" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Collection of #rstats and #biostats worksheets" />
+  <meta name="twitter:title" content="4 seed aRt | Collection of #rstats and #biostats worksheets" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="eigenfaces.html"/>
 
-<link rel="next" href="animating-acronyms.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -153,28 +153,82 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Collection of #rstats and #biostats worksheets</h1>
-<p class="author"><em>written by <a href="https://twitter.com/statbiscuit">statbiscuits</a></em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
+<div id="seed-art" class="section level1">
+<h1><span class="header-section-number">4</span> <code>seed</code> aRt</h1>
+<div id="what-is-a-seed" class="section level2">
+<h2><span class="header-section-number">4.1</span> What is a seed?</h2>
+<p><em>&quot;A random seed (or seed state, or just seed) is a number used to initialize a pseudorandom number generator.&quot;</em></p>
 <div class="figure">
-<img src="https://raw.githubusercontent.com/allisonhorst/stats-illustrations/master/rstats-artwork/dog_treats_pipe.jpg" />
+<img src="http://etoan.com/random-number-generation/dilbert2001182781025.gif" />
 
 </div>
-<p>Artwork by <a href="https://github.com/allisonhorst/">@allison_horst</a></p>
-<p>A collection of (MWE) worksheets illustrating some fundamental #rstats and #biostats concepts. These sheets are meant as (fun) worked examples; they are <strong>not</strong> meant as comprehensive teaching materials. The worked examples, alongside the provided data, can be used as <em>optional</em> or <em>extra</em> casestudies to illustrate the concepts and familiarise students with the approaches outwith course materials.</p>
-<p>Feel free to modify and extend for your own use (<a href="https://github.com/cmjt/statbiscuits/tree/master/swots">Rmarkdown files</a>).</p>
+<div id="flametree" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> <a href="https://github.com/djnavarro/flametree">flametree</a></h3>
+<p>Inspired by <a href="https://djnavarro.net/">Danielle Navarro</a>'s <a href="https://github.com/djnavarro">aRt</a> packages we illustrate, using art, what setting a random <code>seed</code> does.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## use
+## devtools::install_github(&quot;djnavarro/flametree&quot;)
+## to install
+<span class="kw">library</span>(flametree)</code></pre></div>
+<p>To <em>grow</em> the <em>flametree</em> we use the <code>flametree_grow()</code> function which has an argument <code>seed</code>. Using this we can grow any number of unique <em>flametrees</em>!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## R release date = 29 February 2000
+## so set seed = 20000229
+flametree &lt;-<span class="st"> </span><span class="kw">flametree_grow</span>(<span class="dt">seed =</span> <span class="dv">20000229</span>) 
+<span class="kw">flametree_plot</span>(<span class="dt">tree =</span> flametree)  </code></pre></div>
+<p><img src="_main_files/figure-html/flam1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## The year of lockdowns 2020
+flametree &lt;-<span class="st"> </span><span class="kw">flametree_grow</span>(<span class="dt">seed =</span> <span class="dv">2020</span>) 
+<span class="kw">flametree_plot</span>(<span class="dt">tree =</span> flametree)  </code></pre></div>
+<p><img src="_main_files/figure-html/flam2-1.png" width="672" /></p>
+<div id="grow-your-own-tree" class="section level4">
+<h4><span class="header-section-number">4.1.1.1</span> <a href="https://cmjt.shinyapps.io/flameseed/">Grow your own tree</a></h4>
+<iframe src="https://cmjt.shinyapps.io/flameseed/" width="672" height="500px">
+</iframe>
+</div>
+</div>
+<div id="thorns" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Thorns</h3>
+<p>What about <a href="https://github.com/djnavarro/thorn02">thorn02</a>?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## required packages
+pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rcpp&quot;</span>,<span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;ggforce&quot;</span>,<span class="st">&quot;voronise&quot;</span>,<span class="st">&quot;dplyr&quot;</span>,<span class="st">&quot;here&quot;</span>)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(pkgs)) <span class="cf">if</span>(<span class="op">!</span><span class="kw">require</span>(pkgs[i])) <span class="kw">install.packages</span>(pkgs[i])
+## This isn&#39;t a package so we source the code files from GitHub
+## and create the directory structure the function expects
+## .cpp file needed
+<span class="kw">dir.create</span>(<span class="st">&quot;../source&quot;</span>)
+<span class="kw">dir.create</span>(<span class="st">&quot;../image&quot;</span>)
+<span class="kw">download.file</span>(<span class="st">&quot;https://raw.githubusercontent.com/djnavarro/thorn02/master/source/thorn_02.cpp&quot;</span>,<span class="dt">destfile =</span> <span class="st">&quot;../source/thorn_02.cpp&quot;</span>)
+devtools<span class="op">::</span><span class="kw">source_url</span>(<span class="st">&quot;https://raw.githubusercontent.com/djnavarro/thorn02/master/source/thorn_02.R&quot;</span>)</code></pre></div>
+<p>The <code>thorn02()</code> function we've just sourced has one argument: <code>seed</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## using the worst password in the world
+<span class="kw">thorn02</span>(<span class="dt">seed =</span> <span class="dv">1234</span>)</code></pre></div>
+<div class="figure">
+<img src="../image/thorn_02_1234.png" />
 
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## glasses of wine I had last night
+<span class="kw">thorn02</span>(<span class="dt">seed =</span> <span class="dv">3</span>)</code></pre></div>
+<div class="figure">
+<img src="../image/thorn_02_3.png" />
+
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## R release date = 29 February 2000
+## so set seed = 20000229
+<span class="kw">thorn02</span>(<span class="dt">seed =</span> <span class="dv">20000229</span>)</code></pre></div>
+<div class="figure">
+<img src="../image/thorn_02_20000229.png" />
+
+</div>
+
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="eigenfaces.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="animating-acronyms.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
