@@ -8,7 +8,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 *"A random seed (or seed state, or just seed) is a number used to initialize a pseudorandom number generator."*
 
-![](http://etoan.com/random-number-generation/dilbert2001182781025.gif)
+![]("http://etoan.com/random-number-generation/dilbert2001182781025.gif")
 
 ### [flametree](https://github.com/djnavarro/flametree)
 
@@ -71,7 +71,7 @@ The `thorn02()` function we've just sourced has one argument: `seed`.
 thorn02(seed = 1234)
 ```
 
-![](../image/thorn_02_1234.png)
+![]("https://raw.githubusercontent.com/cmjt/statbiscuits/master/docs/images/thorn_02_1234.png")
 
 
 ```{r second, echo = TRUE, eval = FALSE}
@@ -80,7 +80,7 @@ thorn02(seed = 3)
 ```
 
 
-![](../image/thorn_02_3.png)
+![]("https://raw.githubusercontent.com/cmjt/statbiscuits/master/docs/images/thorn_02_3.png")
 
 
 ```{r third, echo = TRUE, eval = FALSE}
@@ -91,4 +91,4 @@ thorn02(seed = 20000229)
 
 
 
-![](../image/thorn_02_20000229.png)
+![]("https://raw.githubusercontent.com/cmjt/statbiscuits/master/docs/images/thorn_02_20000229.png")
