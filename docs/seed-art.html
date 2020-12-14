@@ -135,6 +135,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="seed-art.html"><a href="seed-art.html"><i class="fa fa-check"></i><b>4</b> <code>seed</code> aRt</a><ul>
 <li class="chapter" data-level="4.1" data-path="seed-art.html"><a href="seed-art.html#what-is-a-seed"><i class="fa fa-check"></i><b>4.1</b> What is a seed?</a></li>
+<li class="chapter" data-level="4.2" data-path="seed-art.html"><a href="seed-art.html#flametree"><i class="fa fa-check"></i><b>4.2</b> <a href="https://github.com/djnavarro/flametree">flametree</a></a></li>
+<li class="chapter" data-level="4.3" data-path="seed-art.html"><a href="seed-art.html#thorns"><i class="fa fa-check"></i><b>4.3</b> Thorns</a></li>
 </ul></li>
 </ul>
 
@@ -162,8 +164,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png" />
 
 </div>
-<div id="flametree" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> <a href="https://github.com/djnavarro/flametree">flametree</a></h3>
+</div>
+<div id="flametree" class="section level2">
+<h2><span class="header-section-number">4.2</span> <a href="https://github.com/djnavarro/flametree">flametree</a></h2>
 <p>Inspired by <a href="https://djnavarro.net/">Danielle Navarro</a>'s <a href="https://github.com/djnavarro">aRt</a> packages we illustrate, using art, what setting a random <code>seed</code> does.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## use
 ## devtools::install_github(&quot;djnavarro/flametree&quot;)
@@ -179,14 +182,14 @@ flametree &lt;-<span class="st"> </span><span class="kw">flametree_grow</span>(<
 flametree &lt;-<span class="st"> </span><span class="kw">flametree_grow</span>(<span class="dt">seed =</span> <span class="dv">2020</span>) 
 <span class="kw">flametree_plot</span>(<span class="dt">tree =</span> flametree)  </code></pre></div>
 <p><img src="_main_files/figure-html/flam2-1.png" width="672" /></p>
-<div id="grow-your-own-tree" class="section level4">
-<h4><span class="header-section-number">4.1.1.1</span> <a href="https://cmjt.shinyapps.io/flameseed/">Grow your own tree</a></h4>
+<div id="grow-your-own-tree" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> <a href="https://cmjt.shinyapps.io/flameseed/">Grow your own tree</a></h3>
 <iframe src="https://cmjt.shinyapps.io/flameseed/" width="672" height="500px">
 </iframe>
 </div>
 </div>
-<div id="thorns" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Thorns</h3>
+<div id="thorns" class="section level2">
+<h2><span class="header-section-number">4.3</span> Thorns</h2>
 <p>What about <a href="https://github.com/djnavarro/thorn02">thorn02</a>?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## required packages
 pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rcpp&quot;</span>,<span class="st">&quot;ggplot2&quot;</span>,<span class="st">&quot;ggforce&quot;</span>,<span class="st">&quot;voronise&quot;</span>,<span class="st">&quot;dplyr&quot;</span>,<span class="st">&quot;here&quot;</span>)
@@ -219,7 +222,6 @@ devtools<span class="op">::</span><span class="kw">source_url</span>(<span class
 
 </div>
 
-</div>
 </div>
 </div>
             </section>

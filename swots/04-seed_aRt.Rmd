@@ -10,7 +10,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 ![](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)
 
-### [flametree](https://github.com/djnavarro/flametree)
+## [flametree](https://github.com/djnavarro/flametree)
 
 Inspired by [Danielle Navarro](https://djnavarro.net/)'s [aRt](https://github.com/djnavarro) packages we illustrate, using art, what setting a random `seed` does.
 
@@ -38,14 +38,14 @@ flametree <- flametree_grow(seed = 2020)
 flametree_plot(tree = flametree)  
 ```
 
-#### [Grow your own tree](https://cmjt.shinyapps.io/flameseed/)
+### [Grow your own tree](https://cmjt.shinyapps.io/flameseed/)
 
 
 ```{r iframe, eval = TRUE, echo = FALSE}
 knitr::include_url("https://cmjt.shinyapps.io/flameseed/", height = "500px")
 ```
 
-### Thorns
+## Thorns
 
 
 What about [thorn02](https://github.com/djnavarro/thorn02)? 
