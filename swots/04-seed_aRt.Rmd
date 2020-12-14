@@ -8,7 +8,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 *"A random seed (or seed state, or just seed) is a number used to initialize a pseudorandom number generator."*
 
-![](http://etoan.com/random-number-generation/dilbert2001182781025.gif)
+![](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)
 
 ### [flametree](https://github.com/djnavarro/flametree)
 
