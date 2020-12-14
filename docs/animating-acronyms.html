@@ -203,16 +203,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="format-the-data-to-suit-our-porposes" class="section level2">
 <h2><span class="header-section-number">1.2</span> Format the data to suit our porposes</h2>
 <p>A long list probably isn't the best way to summarise these data - We could combine all the elements into one big <code>dataframe</code> (remember we have already have a column specifying year)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(top_twenty)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+df &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(top_twenty)
 <span class="kw">head</span>(df)</code></pre></div>
 <pre><code>##      pmid acronyms nchar source Journal.Title      ISSN     eISSN Year Volume
 ## 1 1688383      RNA     3  Title       J Virol 0022-538X 1098-5514 1990     64
