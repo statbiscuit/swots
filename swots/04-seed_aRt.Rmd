@@ -10,9 +10,9 @@ knitr::opts_chunk$set(cache = TRUE)
 
 ![](https://www.incibe-cert.es/sites/default/files/blog/comprobando-aleatoriedad/dilbert.png)
 
-## [flametree](https://github.com/djnavarro/flametree)
+## `flametree`
 
-Inspired by [Danielle Navarro](https://djnavarro.net/)'s [aRt](https://github.com/djnavarro) packages we illustrate, using art, what setting a random `seed` does.
+Inspired by [Danielle Navarro](https://djnavarro.net/)'s [aRt](https://github.com/djnavarro) [`flamtree`](https://github.com/djnavarro/flametree) package we illustrate, using art, what setting a random `seed` does.
 
 ```{r flametree,echo = TRUE}
 ## use
@@ -29,13 +29,13 @@ To *grow* the *flametree* we use the `flametree_grow()` function which has an ar
 ## R release date = 29 February 2000
 ## so set seed = 20000229
 flametree <- flametree_grow(seed = 20000229) 
-flametree_plot(tree = flametree)  
+flametree_plot(data = flametree)  
 ```
 
 ```{r flam2,echo = TRUE}
 ## The year of lockdowns 2020
 flametree <- flametree_grow(seed = 2020) 
-flametree_plot(tree = flametree)  
+flametree_plot(data = flametree)  
 ```
 
 ### [Grow your own tree](https://cmjt.shinyapps.io/flameseed/)
