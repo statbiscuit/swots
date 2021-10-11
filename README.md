@@ -6,6 +6,7 @@ This repo contains
  - [**s**tatbiscuits **wor**ksheet**s**](https://cmjt.github.io/statbiscuits/) (swots) that go hand in hand with courses I teach ([source code here](https://github.com/cmjt/statbiscuits/tree/master/swots))
  - [source code](https://github.com/cmjt/statbiscuits/tree/master/probable) for a simple RShiny application that allows students to explore the shapes of probability distributions: [probable](https://cmjt.shinyapps.io/probable)
  - [RShiny application introducing linear additive model with the Palmer penguins dataset]( https://cmjt.shinyapps.io/penguin/). Link to the [source code](https://github.com/cmjt/statbiscuits/tree/master/dashboards/penguin) and link to more info about [the data](https://github.com/allisonhorst/palmerpenguins).
+ - [Using aRt as an introduction to linear modelling](https://cmjt.shinyapps.io/genart/) inspired by [Danielle Navarro's](https://djnavarro.net/) blog [Notes from a data witch: Art, jasmines, and the water colours](https://blog.djnavarro.net/water-colours).
 
 Feel free to fork and modify for your own use or just download the gifs :-)
 
